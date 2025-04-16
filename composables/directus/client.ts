@@ -1,6 +1,5 @@
 // Directus SDK client configuration
 import { createDirectus, rest, readItems, readItem } from '@directus/sdk';
-import type { TypeOf } from '@directus/types';
 
 // Define your Directus collection types
 export interface Profile {
@@ -153,7 +152,7 @@ export async function fetchSkillCategories() {
     const skillCategories = await directusClient.request(
       readItems('skill_categories', {
         sort: ['sort'],
-        fields: ['*', 'skills.*']
+        fields: ['*', { skills: ['*'] }]
       })
     );
     return skillCategories;
