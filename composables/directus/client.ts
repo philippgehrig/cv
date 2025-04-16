@@ -13,12 +13,20 @@ export interface Profile {
   twitter?: string;
 }
 
-export interface Experience {
-  id: number;
-  position: string;
-  company: string;
+export interface Role {
+  title: string;
   period: string;
   description: string;
+  technologies?: string[];
+}
+
+export interface Experience {
+  id: number;
+  company: string;
+  roles?: Role[];  // For multiple roles within one company
+  position?: string; // Kept for backward compatibility
+  period?: string;   // Kept for backward compatibility
+  description?: string; // Kept for backward compatibility
   technologies?: string[];
   sort?: number;
 }
@@ -106,16 +114,36 @@ export async function fetchExperiences() {
     return [
       {
         id: 1,
-        position: 'Corporate Student - Computer Science',
         company: 'Mercedes Benz',
         period: '2022 - 2025',
-        description: 'Participated in a dual study program combining theoretical education with practical work experience at Mercedes Benz, focusing on computer science applications in the automotive industry.',
-        technologies: ['Software Development', 'Embedded Systems', 'C/C++', 'Automotive Systems', 'Data Analysis', 'ADAS', 'Automtovie Architecture']
+        position: 'Corporate Student - Computer Science', // For backward compatibility
+        description: 'Participated in a dual study program combining theoretical education with practical work experience at Mercedes Benz.', // For backward compatibility
+        roles: [
+          {
+            title: 'Software Development for ECU Testing',
+            period: 'Jan 2024 - Apr 2025',
+            description: 'Developed software tools for automated testing of electronic control units (ECUs) in advanced driver assistance systems.',
+            technologies: ['C++', 'Python', 'Automotive Systems', 'ECU Testing', 'ADAS']
+          },
+          {
+            title: 'Data Analysis for Vehicle Dynamics',
+            period: 'May 2023 - Dec 2023',
+            description: 'Analyzed and visualized vehicle dynamics data to improve simulation models for autonomous driving scenarios.',
+            technologies: ['Data Analysis', 'Python', 'MATLAB', 'Vehicle Dynamics', 'Autonomous Driving']
+          },
+          {
+            title: 'Embedded Systems Programming',
+            period: 'Sep 2022 - Apr 2023',
+            description: 'Implemented embedded systems solutions for automotive applications, focusing on real-time performance and reliability.',
+            technologies: ['Embedded Systems', 'C', 'Real-time Systems', 'Automotive Architecture']
+          }
+        ],
+        technologies: ['Software Development', 'Embedded Systems', 'C/C++', 'Automotive Systems', 'Data Analysis', 'ADAS', 'Automotive Architecture']
       },
       {
         id: 2,
-        position: 'Team Leader - CFD Simulations',
         company: 'DHBW Engineering',
+        position: 'Lead CFD Engineer',
         period: '2023 - 2025',
         description: 'Led a team focused on Computational Fluid Dynamics (CFD) simulations, overseeing project planning, task delegation, and technical implementation of simulation models.',
         technologies: ['CFD', 'Team Leadership', 'Project Management', 'Simulation', 'IT Infrastructure', 'Data Analysis']
