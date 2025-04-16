@@ -13,7 +13,8 @@ export function useSkills() {
     error.value = null;
     
     try {
-      skillCategories.value = await fetchSkillCategories();
+      // Type assertion to ensure the returned data conforms to SkillCategory[]
+      skillCategories.value = (await fetchSkillCategories()) as SkillCategory[];
     } catch (err) {
       error.value = err as Error;
       console.error('Error loading skills data:', err);
