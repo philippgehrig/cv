@@ -15,7 +15,7 @@ A modern, responsive personal CV/resume website built with Nuxt.js, Vue, TypeScr
 
 ### Prerequisites
 
-- Node.js (v18+)
+- Node.js (v22)
 - A Directus instance (self-hosted or cloud-based)
 
 ### Installation
@@ -38,6 +38,19 @@ npm install
    ```
    DIRECTUS_URL=https://your-directus-instance.com
    ```
+
+### Running Directus with Docker Compose
+
+You can run a local Directus instance using Docker Compose. This project includes a `docker-compose.yml` and `.env` file for convenience.
+
+1. Copy or edit the `.env` file in the project root to set your admin and database credentials.
+2. Start Directus and Postgres:
+
+```bash
+docker compose up -d
+```
+
+3. Access Directus at [http://localhost:8055](http://localhost:8055)
 
 ### Development
 
@@ -78,19 +91,3 @@ All content is managed through Directus. To update your CV information:
 2. Navigate to the relevant collection (Profile, Experiences, Education, etc.)
 3. Update the content as needed
 4. Your website will automatically reflect the changes
-
-## Deployment
-
-This website can be deployed to any platform that supports Node.js applications, such as:
-
-- Vercel
-- Netlify
-- AWS
-- Digital Ocean
-- Heroku
-
-Refer to the specific platform's documentation for deployment instructions.
-
-## License
-
-MIT
