@@ -118,7 +118,7 @@
 </template>
 
 <script setup lang="ts">
-import { useExperiences } from '~/composables/directus/useExperiences';
+import { useExperiences } from '~/composables/useExperiences';
 
 const { experiences, isLoading, error } = useExperiences();
 

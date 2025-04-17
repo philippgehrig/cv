@@ -21,7 +21,7 @@ useProfileMock.mockReturnValue({
 })
 
 // Mock the composable
-vi.mock('../../../composables/directus/useProfile', () => ({
+vi.mock('../../../composables/useProfile', () => ({
   useProfile: () => useProfileMock()
 }))
 

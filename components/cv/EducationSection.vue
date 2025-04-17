@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { useEducation } from '~/composables/directus/useEducation';
+import { useEducation } from '~/composables/useEducation';
 
 const { education, isLoading, error } = useEducation();
 </script>

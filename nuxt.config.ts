@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   // Optimize data fetching
   vite: {
     optimizeDeps: {
-      include: ['@directus/sdk']
+      include: []
     }
   },
 })

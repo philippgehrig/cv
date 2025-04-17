@@ -13,7 +13,6 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@directus/sdk": "^19.1.0",
     "@nuxt/content": "^3.4.0",
     "@nuxtjs/tailwindcss": "^6.13.2",
     "@vueuse/head": "vueuse/head",

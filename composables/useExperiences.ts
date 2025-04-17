@@ -1,7 +1,7 @@
 // Composable for providing experience data
 import { ref, onMounted } from 'vue';
-import { fetchExperiences } from './client';
-import type { Experience } from './client';
+import { experiencesData } from './data/experiencesData';
+import type { Experience } from './data/types';
 
 export function useExperiences() {
   const experiences = ref<Experience[]>([]);
@@ -13,7 +13,9 @@ export function useExperiences() {
     error.value = null;
     
     try {
-      experiences.value = await fetchExperiences();
+      // Simulate a small delay to mimic async loading
+      await new Promise(resolve => setTimeout(resolve, 100));
+      experiences.value = experiencesData;
     } catch (err) {
       error.value = err as Error;
       console.error('Error loading experience data:', err);

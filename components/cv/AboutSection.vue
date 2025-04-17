@@ -77,7 +77,7 @@
 </template>
 
 <script setup lang="ts">
-import { useProfile } from '~/composables/directus/useProfile';
+import { useProfile } from '~/composables/useProfile';
 
 const { profile, isLoading, error } = useProfile();
 </script>
