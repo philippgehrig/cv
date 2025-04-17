@@ -3,7 +3,7 @@
     <AboutSection />
     <ExperienceSection />
     <EducationSection />
-    <SkillsSection />
+    <!-- <SkillsSection /> -->
   </div>
 </template>
 

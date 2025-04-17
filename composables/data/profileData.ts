@@ -7,5 +7,6 @@ export const profileData: Profile = {
   bio: 'A passionate software engineer with expertise in embedded systems, C/C++, and web development.',
   profile_image: '/images/Philipp-Gehrig_2025.png',
   linkedin: 'https://linkedin.com/in/philippgehrig',
-  github: 'https://github.com/philippgehrig'
+  github: 'https://github.com/philippgehrig',
+  twitter: 'https://twitter.com/thisphilipp'
 };

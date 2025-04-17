@@ -5,51 +5,54 @@ export const experiencesData: Experience[] = [
     id: 1,
     company: 'Mercedes Benz',
     period: '2022 - 2025',
-    position: 'Corporate Student - Computer Science', // For backward compatibility
-    description: 'Participated in a dual study program combining theoretical education with practical work experience at Mercedes Benz.', // For backward compatibility
+    position: 'Corporate Student - Computer Science',
+    description: 'Participated in a dual study program combining theoretical education with practical work experience at Mercedes Benz. During this time I worked in various departments, focusing on software development, data analysis, and automotive systems.',
     roles: [
       {
-        title: 'Software Development for ECU Testing',
-        period: 'Jan 2024 - Apr 2025',
-        description: 'Developed software tools for automated testing of electronic control units (ECUs) in advanced driver assistance systems.',
-        technologies: ['C++', 'Python', 'Automotive Systems', 'ECU Testing', 'ADAS']
+        title: 'Corporate Student - PoC for Zonal Architecture with PCIe',
+        period: 'April 2025 - Sep 2025',
+        description: 'Developed of a Proof of Concept for a zonal architecture solution with PCIe.',
+        technologies: ['PCIe', 'Bus Systems', 'ADAS', 'Linux Driver', 'C/C++', 'Hardware Architecture']
       },
       {
-        title: 'Data Analysis for Vehicle Dynamics',
-        period: 'May 2023 - Dec 2023',
-        description: 'Analyzed and visualized vehicle dynamics data to improve simulation models for autonomous driving scenarios.',
-        technologies: ['Data Analysis', 'Python', 'MATLAB', 'Vehicle Dynamics', 'Autonomous Driving']
+        title: 'Corporate Student - CI/CD Engineer for ADAS Systems',
+        period: 'Dez 2025 - Feb 2025',
+        description: 'Developed software tools for automated flashing for ADAS systems, improving the efficiency of the testing process by 20%.',
+        technologies: ['BASH', 'CI/CD', 'ADAS', 'NVIDIA Jetson']
       },
       {
-        title: 'Embedded Systems Programming',
-        period: 'Sep 2022 - Apr 2023',
-        description: 'Implemented embedded systems solutions for automotive applications, focusing on real-time performance and reliability.',
-        technologies: ['Embedded Systems', 'C', 'Real-time Systems', 'Automotive Architecture']
+        title: 'Corporate Student - KPI Analysis for SCRUM Sprints',
+        period: 'Jun 2024 - Sep 2024',
+        description: 'Automated the creation of key performance indicators (KPIs) for SCRUM sprints, increasing developer productivity by 5%.',
+        technologies: ['Data Analysis', 'Grafana', 'SCRUM', 'Jira', 'PostgreSQL', 'TypeScript']
+      },
+      {
+        title: 'Corporate Student - CAN Bus Communication via WiFi',
+        period: 'Nov 2023 - Apr 2024',
+        description: 'Implemented a solution for analysing CAN bus communication over WiFi, enhancing the debugging process for automotive systems.',
+        technologies: ['Embedded Systems', 'C/C++', 'CAN Bus', 'ESP32', 'WiFi', 'Automotive Systems']
       }
     ],
-    technologies: ['Software Development', 'Embedded Systems', 'C/C++', 'Automotive Systems', 'Data Analysis', 'ADAS', 'Automotive Architecture']
   },
   {
     id: 2,
     company: 'DHBW Engineering e.V.',
+    period: '2024 - 2025',
+    position: 'Lead Engineer',
+    description: 'Worked on various projects related to automotive software engineering',
     roles: [
       {
         title: 'Lead CFD Engineer',
-        period: 'Sep 2023 - Apr 2025',
+        period: 'Sep 2024 - Sep 2025',
         description: 'Led a team focused on Computational Fluid Dynamics (CFD) simulations, overseeing project planning, task delegation, and technical implementation of simulation models.',
-        technologies: ['CFD', 'Team Leadership', 'Project Management', 'Simulation', 'OpenFOAM', 'Paraview']
+        technologies: ['CFD', 'Team Leadership', 'Project Management', 'Simulation', 'StarCCM', 'Laravel']
       },
       {
-        title: 'IT Infrastructure Manager',
-        period: 'Feb 2023 - Aug 2023',
-        description: 'Managed and optimized computing resources for simulation workflows, implemented version control systems, and developed automation scripts for data processing.',
-        technologies: ['Linux', 'Bash Scripting', 'High Performance Computing', 'Git', 'CI/CD', 'Python']
+        title: 'Vehicle Dynamics Software Engineer',
+        period: 'Feb 2024 - Sep 2024',
+        description: 'Created a tool for real time monitoring of vehicle data, improving the efficiency of data analysis and decision-making processes.',
+        technologies: ['Linux', 'Docker', 'Vehicle Dynamics', 'Grafana', 'CI/CD', 'InfluxDB', 'Matlab/Simulink']
       }
     ],
-    // For backward compatibility
-    position: 'Lead CFD Engineer',
-    period: '2023 - 2025',
-    description: 'Led engineering teams and managed IT infrastructure for Formula Student racing team projects.',
-    technologies: ['CFD', 'Team Leadership', 'Project Management', 'Simulation', 'IT Infrastructure', 'Linux', 'HPC']
   }
 ];

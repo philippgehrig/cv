@@ -207,7 +207,7 @@
 const post = {
   title: "Introduction to the Basics of CFD Simulations",
   description: "Learn the fundamental concepts of Computational Fluid Dynamics (CFD) and how these simulations help engineers solve complex flow problems",
-  date: "2025-04-17T10:00:00.000Z", // Today's date as specified in the context
+  date: "2025-04-17T10:00:00.000Z",
   tags: ["engineering", "cfd", "fluid-dynamics", "simulation"]
 };
 </script>

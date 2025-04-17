@@ -21,10 +21,10 @@ export interface Role {
 export interface Experience {
   id: number;
   company: string;
-  roles?: Role[];  // For multiple roles within one company
-  position?: string; // Kept for backward compatibility
-  period?: string;   // Kept for backward compatibility
-  description?: string; // Kept for backward compatibility
+  roles?: Role[]; 
+  position?: string; 
+  period?: string; 
+  description?: string; 
   technologies?: string[];
   sort?: number;
 }
