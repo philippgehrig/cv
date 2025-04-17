@@ -1,22 +1,42 @@
 # Personal CV Website
 
-A modern, responsive personal CV/resume website built with Nuxt.js, Vue, TypeScript, Tailwind CSS, and Directus as a headless CMS.
+A modern, responsive personal CV/resume website built with Nuxt.js, Vue, TypeScript, and Tailwind CSS.
 
 ## Features
 
 - 📱 Fully responsive design with Tailwind CSS
 - 🚀 Built with Nuxt 3, Vue 3, and TypeScript
-- 📊 Headless CMS integration with Directus for easy content management
 - 📝 Sections for About, Experience, Education, Skills, and Contact
+- 📖 Integrated blog with Vue components
+- 🔍 Blog search and pagination functionality
+- 📋 Table of contents for blog posts
+- 🧪 Comprehensive test coverage with Vitest
 - 📬 Contact form for visitors to reach out to you
 - 🎨 Modern, clean UI design
+
+## Project Structure
+
+```
+├── components/        # Vue components
+│   ├── blog/          # Blog-related components
+│   ├── cv/            # CV section components
+│   └── layout/        # Layout components (navbar, footer)
+├── composables/       # Vue composables for data fetching
+├── content/           # Content files
+│   └── blog/          # Blog content files
+├── pages/             # Application pages
+│   ├── blog/          # Blog pages and posts
+│   └── policies/      # Legal pages
+├── plugins/           # Vue plugins
+├── public/            # Static assets
+├── tests/             # Test files
+```
 
 ## Setup Instructions
 
 ### Prerequisites
 
 - Node.js (v22)
-- A Directus instance (self-hosted or cloud-based)
 
 ### Installation
 
@@ -24,40 +44,15 @@ A modern, responsive personal CV/resume website built with Nuxt.js, Vue, TypeScr
 2. Install dependencies:
 
 ```bash
-npm install
+yarn install
 ```
-
-3. Set up your Directus instance:
-   - Create a new Directus project
-   - Set up collections for: `profile`, `experiences`, `education`, `skill_categories`, `skills`, and `contact`
-   - Structure these collections according to the interfaces defined in `composables/directus/client.ts`
-   - Add initial data to your collections
-
-4. Configure the environment:
-   - Update the `.env` file with your Directus URL:
-   ```
-   DIRECTUS_URL=https://your-directus-instance.com
-   ```
-
-### Running Directus with Docker Compose
-
-You can run a local Directus instance using Docker Compose. This project includes a `docker-compose.yml` and `.env` file for convenience.
-
-1. Copy or edit the `.env` file in the project root to set your admin and database credentials.
-2. Start Directus and Postgres:
-
-```bash
-docker compose up -d
-```
-
-3. Access Directus at [http://localhost:8055](http://localhost:8055)
 
 ### Development
 
 Start the development server:
 
 ```bash
-npm run dev
+yarn dev
 ```
 
 ### Production
@@ -65,14 +60,100 @@ npm run dev
 Build the application for production:
 
 ```bash
-npm run build
+yarn build
 ```
 
 Preview the production build:
 
 ```bash
-npm run preview
+yarn preview
 ```
+
+### Testing
+
+The project uses Vitest for unit testing Vue components and functionality.
+
+Run the tests:
+
+```bash
+yarn test
+```
+
+Run tests with coverage report:
+
+```bash
+yarn test:coverage
+```
+
+## Blog System
+
+The website includes a blog system that supports:
+
+- Vue-based blog post pages
+- Code syntax highlighting with Prism
+- Table of contents generation
+- Pagination for blog listings
+- Search functionality
+
+### Adding Blog Posts
+
+1. Create a new Vue file in the `pages/blog/posts/` directory (e.g., `my-new-post.vue`)
+2. Use the following template structure:
+
+```vue
+<template>
+  <BlogPostLayout :post="post">
+    <h1>Your Blog Post Title</h1>
+    
+    <p>
+      Introduction paragraph goes here. This is where you can provide an overview
+      of what the blog post will cover.
+    </p>
+    
+    <h2>First Section Heading</h2>
+    
+    <p>
+      Content for the first section. You can include paragraphs, lists, code blocks,
+      and other HTML elements as needed.
+    </p>
+    
+    <h2>Second Section Heading</h2>
+    
+    <p>
+      More content here...
+    </p>
+    
+    <ul>
+      <li>List item one</li>
+      <li>List item two</li>
+      <li>List item three</li>
+    </ul>
+    
+    <h2>Conclusion</h2>
+    
+    <p>
+      Wrap-up paragraph and closing thoughts.
+    </p>
+  </BlogPostLayout>
+</template>
+
+<script setup lang="ts">
+// Post metadata
+const post = {
+  title: "Your Blog Post Title",
+  description: "A short description of the post that will appear in previews and SEO",
+  date: "YYYY-MM-DDT00:00:00.000Z", // ISO date format
+  tags: ["tag1", "tag2", "tag3"] // Categories or keywords for the post
+};
+</script>
+```
+
+3. The blog post will automatically appear in the blog listing page with pagination and search functionality.
+
+4. The `<BlogPostLayout>` component handles:
+   - Displaying the title, date, and tags
+   - Generating the table of contents
+   - Providing consistent styling across all blog posts
 
 ## Customization
 
@@ -85,9 +166,6 @@ The website uses Tailwind CSS for styling. You can customize the design by:
 
 ### Content
 
-All content is managed through Directus. To update your CV information:
+All content is directly managed through Vue components and page files. To update your CV information, modify the corresponding component files in the `components/cv/` directory.
 
-1. Log in to your Directus admin panel
-2. Navigate to the relevant collection (Profile, Experiences, Education, etc.)
-3. Update the content as needed
-4. Your website will automatically reflect the changes
+Blog content is managed through Vue files in the `pages/blog/posts/` directory.
