@@ -20,6 +20,11 @@ FROM node:23-alpine AS production
 # Set environment variables
 ENV NODE_ENV=production
 
+# Add labels for better organization
+LABEL org.opencontainers.image.source="https://github.com/philippgehrig/cv"
+LABEL org.opencontainers.image.description="Personal CV"
+LABEL maintainer="Philipp Gehrig"
+
 # Set working directory
 WORKDIR /app
 
