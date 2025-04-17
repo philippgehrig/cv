@@ -1,12 +1,13 @@
 // Composable for fetching education data from Directus
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { fetchEducation } from './client';
 import type { Education } from './client';
 
-export function useEducation() {
+export function useEducation(autoRefresh = false) {
   const education = ref<Education[]>([]);
   const isLoading = ref(true);
   const error = ref<Error | null>(null);
+  let refreshInterval: NodeJS.Timeout | null = null;
 
   async function loadEducation() {
     isLoading.value = true;
@@ -22,14 +23,39 @@ export function useEducation() {
     }
   }
 
+  // Set up auto-refresh
+  function setupAutoRefresh(enabled: boolean) {
+    if (refreshInterval) {
+      clearInterval(refreshInterval);
+      refreshInterval = null;
+    }
+    
+    if (enabled) {
+      // Refresh every 30 seconds
+      refreshInterval = setInterval(() => {
+        loadEducation();
+      }, 30000);
+    }
+  }
+
   onMounted(() => {
     loadEducation();
+    setupAutoRefresh(autoRefresh);
+  });
+
+  // Clean up interval on component unmount
+  onUnmounted(() => {
+    if (refreshInterval) {
+      clearInterval(refreshInterval);
+    }
   });
 
   return {
     education,
     isLoading,
     error,
-    refresh: loadEducation
+    refresh: loadEducation,
+    enableAutoRefresh: () => setupAutoRefresh(true),
+    disableAutoRefresh: () => setupAutoRefresh(false)
   };
 }

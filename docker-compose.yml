@@ -13,10 +13,31 @@ services:
       DB_USER: ${DIRECTUS_DB_USER}
       DB_PASSWORD: ${DIRECTUS_DB_PASSWORD}
       WEBSOCKETS_ENABLED: "true"
+      KEY: "255d861b-5ea1-5996-9aa3-922530ec40b1"
+      SECRET: "6116487b-cda1-52c2-b5b5-c8022c45e263"
     depends_on:
       - db
     env_file:
       - .env
+    # Removed healthcheck to simplify
+
+  directus-seeder:
+    build: 
+      context: .
+      dockerfile: docker/seeder.Dockerfile
+    restart: "no"  # Changed from 'on-failure' to 'no' so it doesn't restart automatically
+    environment:
+      DIRECTUS_URL: http://directus:8055
+      DIRECTUS_ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
+      DIRECTUS_ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
+      SKIP_IF_DATA_EXISTS: "true"  # Added to make sure seeder respects existing data
+    depends_on:
+      - directus
+    env_file:
+      - .env
+    volumes:
+      - ./scripts:/app/scripts
+      - ./composables:/app/composables
 
   db:
     image: postgres:15

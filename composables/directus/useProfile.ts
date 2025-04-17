@@ -1,12 +1,13 @@
 // Composable for fetching profile data from Directus
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { fetchProfile } from './client';
 import type { Profile } from './client';
 
-export function useProfile() {
+export function useProfile(autoRefresh = false) {
   const profile = ref<Profile | null>(null);
   const isLoading = ref(true);
   const error = ref<Error | null>(null);
+  let refreshInterval: NodeJS.Timeout | null = null;
 
   async function loadProfile() {
     isLoading.value = true;
@@ -22,14 +23,39 @@ export function useProfile() {
     }
   }
 
+  // Set up auto-refresh
+  function setupAutoRefresh(enabled: boolean) {
+    if (refreshInterval) {
+      clearInterval(refreshInterval);
+      refreshInterval = null;
+    }
+    
+    if (enabled) {
+      // Refresh every 30 seconds
+      refreshInterval = setInterval(() => {
+        loadProfile();
+      }, 30000);
+    }
+  }
+
   onMounted(() => {
     loadProfile();
+    setupAutoRefresh(autoRefresh);
+  });
+
+  // Clean up interval on component unmount
+  onUnmounted(() => {
+    if (refreshInterval) {
+      clearInterval(refreshInterval);
+    }
   });
 
   return {
     profile,
     isLoading,
     error,
-    refresh: loadProfile
+    refresh: loadProfile,
+    enableAutoRefresh: () => setupAutoRefresh(true),
+    disableAutoRefresh: () => setupAutoRefresh(false)
   };
 }

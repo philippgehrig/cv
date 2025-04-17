@@ -1,5 +1,6 @@
 // Directus SDK client configuration
 import { createDirectus, rest, readItems, readItem } from '@directus/sdk';
+import { useRuntimeConfig } from '#app';
 
 // Define your Directus collection types
 export interface Profile {
@@ -73,17 +74,19 @@ export interface Schema {
   contact: ContactInfo[];
 }
 
-// Initialize the Directus client
-// You'll need to replace this URL with your actual Directus instance URL
-const directusUrl = process.env.DIRECTUS_URL || 'https://your-directus-instance.com';
-
-export const directusClient = createDirectus<Schema>(directusUrl).with(rest());
+// Initialize the Directus client using the runtime config
+const getDirectusClient = () => {
+  const config = useRuntimeConfig();
+  const directusUrl = config.public.directusUrl as string || 'http://localhost:8055';
+  return createDirectus<Schema>(directusUrl).with(rest());
+};
 
 // Helper functions to fetch data
 export async function fetchProfile() {
   try {
     // Assuming you have a single profile item with ID 1
-    const profile = await directusClient.request(readItem('profile', 1));
+    const client = getDirectusClient();
+    const profile = await client.request(readItem('profile', 1));
     return profile;
   } catch (error) {
     console.error('Error fetching profile:', error);
@@ -102,7 +105,8 @@ export async function fetchProfile() {
 
 export async function fetchExperiences() {
   try {
-    const experiences = await directusClient.request(
+    const client = getDirectusClient();
+    const experiences = await client.request(
       readItems('experiences', {
         sort: ['sort'],
       })
@@ -154,7 +158,8 @@ export async function fetchExperiences() {
 
 export async function fetchEducation() {
   try {
-    const education = await directusClient.request(
+    const client = getDirectusClient();
+    const education = await client.request(
       readItems('education', {
         sort: ['sort'],
       })
@@ -177,7 +182,8 @@ export async function fetchEducation() {
 
 export async function fetchSkillCategories() {
   try {
-    const skillCategories = await directusClient.request(
+    const client = getDirectusClient();
+    const skillCategories = await client.request(
       readItems('skill_categories', {
         sort: ['sort'],
         fields: ['*', { skills: ['*'] }]
@@ -245,7 +251,8 @@ export async function fetchSkillCategories() {
 
 export async function fetchContactInfo() {
   try {
-    const contactInfo = await directusClient.request(
+    const client = getDirectusClient();
+    const contactInfo = await client.request(
       readItems('contact', {
         sort: ['sort'],
       })
