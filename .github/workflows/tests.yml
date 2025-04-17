@@ -1,0 +1,45 @@
+name: Run Tests
+
+on:
+  # Run on push to main branch
+  push:
+    branches: [ main ]
+  # Run on pull requests
+  pull_request:
+    branches: [ main ]
+  # Allow running workflow manually from Actions tab
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 23
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      # Prepare Nuxt application
+      - name: Prepare Nuxt
+        run: yarn postinstall
+
+      # Run tests with coverage
+      - name: Run tests with coverage
+        run: yarn test:coverage
+
+      # Upload test coverage reports
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v3
+        if: always()  # Run even if previous steps failed
+        with:
+          fail_ci_if_error: false
+          verbose: true
+        continue-on-error: true  # Don't fail the build if this step fails
