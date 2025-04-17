@@ -14,7 +14,7 @@ useProfileMock.mockReturnValue({
     profile_image: '/images/Philipp-Gehrig_2025.png',
     linkedin: 'https://linkedin.com/in/philippgehrig',
     github: 'https://github.com/philippgehrig',
-    twitter: 'https://twitter.com/thisphilipp'
+    twitter: 'https://twitter.com/thisphilipp' 
   },
   isLoading: false,
   error: null
@@ -59,7 +59,7 @@ describe('AboutSection', () => {
     expect(socialLinks[1].text()).toContain('GitHub')
     
     // Twitter link
-    expect(socialLinks[2].attributes('href')).toBe('https://twitter.com/philippgehrig')
+    expect(socialLinks[2].attributes('href')).toBe('https://twitter.com/thisphilipp')  // Updated expectation
     expect(socialLinks[2].text()).toContain('Twitter')
   })
 

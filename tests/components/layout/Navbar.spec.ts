@@ -103,11 +103,9 @@ describe('Navbar', () => {
     // Initially there should be no shadow
     expect(wrapper.find('.shadow-apple').exists()).toBe(false)
 
-    // Mock window scroll
+    // Set window.scrollY and call the handleScroll method directly
     window.scrollY = 20
-    
-    // Call the scroll handler directly
-    wrapper.vm.$options.methods?.handleScroll.call(wrapper.vm)
+    await wrapper.vm.handleScroll()
     
     // Now it should have the shadow class
     expect(wrapper.find('.shadow-apple').exists()).toBe(true)
