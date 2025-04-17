@@ -23,16 +23,12 @@ ENV NODE_ENV=production
 # Set working directory
 WORKDIR /app
 
-# Copy only necessary files from builder
-COPY --from=builder /app/.output .output
-COPY --from=builder /app/node_modules node_modules
-COPY --from=builder /app/package.json .
+# Copy built app from builder stage
+COPY --from=builder /app/.output /app/.output
+COPY --from=builder /app/package.json /app/package.json
 
-# Install only production dependencies (if needed)
-# RUN yarn install --production --frozen-lockfile
-
-# Expose port (Nuxt default is 3000)
+# Expose the port
 EXPOSE 3000
 
-# Start the Nuxt server
+# Start the application
 CMD ["node", ".output/server/index.mjs"]

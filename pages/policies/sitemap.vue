@@ -18,15 +18,6 @@
                   </NuxtLink>
                   <p class="text-sm text-apple-gray-500 mt-1">My personal CV and professional information</p>
                 </li>
-                <li>
-                  <NuxtLink to="/contact" class="text-apple-blue hover:underline inline-flex items-center">
-                    <span class="mr-2">Contact</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </NuxtLink>
-                  <p class="text-sm text-apple-gray-500 mt-1">Get in touch with me</p>
-                </li>
               </ul>
             </li>
             
@@ -41,6 +32,15 @@
                     </svg>
                   </NuxtLink>
                   <p class="text-sm text-apple-gray-500 mt-1">Information about how I handle your data</p>
+                </li>
+                <li>
+                  <NuxtLink to="/policies/legal-notice" class="text-apple-blue hover:underline inline-flex items-center">
+                    <span class="mr-2">Legal Notice</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </NuxtLink>
+                  <p class="text-sm text-apple-gray-500 mt-1">Legal information about this website</p>
                 </li>
                 <li>
                   <NuxtLink to="/policies/terms-of-use" class="text-apple-blue hover:underline inline-flex items-center">

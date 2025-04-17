@@ -66,8 +66,8 @@ const route = useRoute();
 
 // Navigation items
 const mainNavItems = [
-  { id: 'home', label: 'Home', path: '/' },
-  { id: 'contact', label: 'Contact', path: '/contact' }
+  { id: 'blog', label: 'Blog', path: '/blog' },
+  { id: 'home', label: 'Home', path: '/' }
 ];
 
 // Mobile menu state

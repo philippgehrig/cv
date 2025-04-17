@@ -50,23 +50,15 @@
         </div>
       </div>
       
-      <!-- Contact Form Link -->
+      <!-- Footer content -->
       <div class="mt-8 pt-6 border-t border-apple-gray-200 text-center">
-        <div class="mb-6">
-          <NuxtLink to="/contact" class="inline-flex items-center px-4 py-2 rounded-full bg-apple-blue text-white text-sm font-medium hover:bg-apple-blue-dark transition-colors duration-300">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-            </svg>
-            Contact Me
-          </NuxtLink>
-        </div>
-        
         <div class="flex flex-col md:flex-row justify-center md:justify-between items-center">
           <p class="text-apple-gray-500 text-sm mb-4 md:mb-0">
             &copy; {{ new Date().getFullYear() }} {{ profile?.name || 'Your Name' }}. All rights reserved.
           </p>
           
           <div class="flex space-x-6 text-xs text-apple-gray-500">
+            <NuxtLink to="/policies/legal-notice" class="hover:text-apple-blue transition-colors duration-300">Legal Notice</NuxtLink>
             <NuxtLink to="/policies/privacy-policy" class="hover:text-apple-blue transition-colors duration-300">Privacy Policy</NuxtLink>
             <NuxtLink to="/policies/terms-of-use" class="hover:text-apple-blue transition-colors duration-300">Terms of Use</NuxtLink>
             <NuxtLink to="/policies/sitemap" class="hover:text-apple-blue transition-colors duration-300">Sitemap</NuxtLink>
@@ -78,7 +70,7 @@
 </template>
 
 <script setup lang="ts">
-import { useProfile } from '~/composables/directus/useProfile';
+import { useProfile } from '@/composables/directus/useProfile';
 
 const { profile, isLoading } = useProfile();
 </script>

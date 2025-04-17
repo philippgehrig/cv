@@ -6,7 +6,8 @@ export default {
     './pages/**/*.vue',
     './plugins/**/*.{js,ts}',
     './app.vue',
-    './error.vue'
+    './error.vue',
+    './content/**/*.md'  // Add content directory for Markdown files
   ],
   theme: {
     extend: {
@@ -39,8 +40,63 @@ export default {
       transitionTimingFunction: {
         'apple': 'cubic-bezier(0.25, 0.1, 0.25, 1)',
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.apple-gray.700'),
+            a: {
+              color: theme('colors.apple-blue.DEFAULT'),
+              '&:hover': {
+                color: theme('colors.apple-blue.dark'),
+              },
+              textDecoration: 'none',
+            },
+            h1: {
+              color: theme('colors.apple-gray.900'),
+              fontWeight: '600',
+            },
+            h2: {
+              color: theme('colors.apple-gray.900'),
+              fontWeight: '600',
+            },
+            h3: {
+              color: theme('colors.apple-gray.900'),
+              fontWeight: '600',
+            },
+            h4: {
+              color: theme('colors.apple-gray.900'),
+              fontWeight: '600',
+            },
+            code: {
+              color: theme('colors.apple-gray.800'),
+              backgroundColor: theme('colors.apple-gray.50'),
+              padding: '0.25rem 0.5rem',
+              borderRadius: '0.25rem',
+              fontWeight: '400',
+            },
+            'code::before': {
+              content: '""',
+            },
+            'code::after': {
+              content: '""',
+            },
+            pre: {
+              backgroundColor: theme('colors.apple-gray.50'),
+              borderWidth: '1px',
+              borderColor: theme('colors.apple-gray.100'),
+              borderRadius: '0.5rem',
+            },
+            blockquote: {
+              color: theme('colors.apple-gray.600'),
+              borderLeftColor: theme('colors.apple-gray.200'),
+            },
+          },
+        },
+      }),
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }
 

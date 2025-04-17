@@ -5,7 +5,7 @@
         <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-center mb-16 text-apple-gray-900">Terms of Use</h1>
         
         <div class="prose prose-lg max-w-none text-apple-gray-600">
-          <p class="text-xl mb-8">Last updated: April 16, 2025</p>
+          <p class="text-xl mb-8">Last updated: April 17, 2025</p>
           
           <h2 class="text-2xl font-semibold text-apple-gray-800 mt-10 mb-6">Introduction</h2>
           <p>Welcome to my personal website. These terms and conditions outline the rules and regulations for the use of my website. By accessing this website, I assume you accept these terms and conditions in full. Do not continue to use my website if you do not accept all of the terms and conditions stated on this page.</p>
@@ -32,9 +32,6 @@
           
           <h2 class="text-2xl font-semibold text-apple-gray-800 mt-10 mb-6">Updates to These Terms</h2>
           <p>I may update these terms of use from time to time. I will notify you of any changes by posting the new terms of use on this page and updating the "Last updated" date at the top of this page.</p>
-          
-          <h2 class="text-2xl font-semibold text-apple-gray-800 mt-10 mb-6">Contact Me</h2>
-          <p>If you have any questions about these terms of use, please <NuxtLink to="/contact" class="text-apple-blue hover:underline">contact me</NuxtLink>.</p>
         </div>
       </div>
     </div>

@@ -56,14 +56,6 @@ export interface Skill {
   sort?: number;
 }
 
-export interface ContactInfo {
-  id: number;
-  label: string;
-  value: string;
-  icon?: string;
-  sort?: number;
-}
-
 // Define the schema for your Directus collections
 export interface Schema {
   profile: Profile[];
@@ -71,103 +63,78 @@ export interface Schema {
   education: Education[];
   skill_categories: SkillCategory[];
   skills: Skill[];
-  contact: ContactInfo[];
 }
-
-// Initialize the Directus client using the runtime config
-const getDirectusClient = () => {
-  const config = useRuntimeConfig();
-  const directusUrl = config.public.directusUrl as string || 'http://localhost:8055';
-  return createDirectus<Schema>(directusUrl).with(rest());
-};
 
 // Helper functions to fetch data
 export async function fetchProfile() {
-  try {
-    // Assuming you have a single profile item with ID 1
-    const client = getDirectusClient();
-    const profile = await client.request(readItem('profile', 1));
-    return profile;
-  } catch (error) {
-    console.error('Error fetching profile:', error);
-    // Return default profile data if API call fails
-    return {
-      id: 1,
-      name: 'Philipp Gehrig',
-      title: 'Software Engineer',
-      bio: 'A passionate software engineer with expertise in embedded systems, C/C++, and web development.',
-      profile_image: '/images/Philipp-Gehrig_2025.png',
-      linkedin: 'https://linkedin.com/in/philippgehrig',
-      github: 'https://github.com/philippgehrig'
-    };
-  }
+  return {
+    id: 1,
+    name: 'Philipp Gehrig',
+    title: 'Software Engineer',
+    bio: 'A passionate software engineer with expertise in embedded systems, C/C++, and web development.',
+    profile_image: '/images/Philipp-Gehrig_2025.png',
+    linkedin: 'https://linkedin.com/in/philippgehrig',
+    github: 'https://github.com/philippgehrig'
+  };
 }
 
 export async function fetchExperiences() {
-  try {
-    const client = getDirectusClient();
-    const experiences = await client.request(
-      readItems('experiences', {
-        sort: ['sort'],
-      })
-    );
-    return experiences;
-  } catch (error) {
-    console.error('Error fetching experiences:', error);
-    // Return default experience data if API call fails
-    return [
-      {
-        id: 1,
-        company: 'Mercedes Benz',
-        period: '2022 - 2025',
-        position: 'Corporate Student - Computer Science', // For backward compatibility
-        description: 'Participated in a dual study program combining theoretical education with practical work experience at Mercedes Benz.', // For backward compatibility
-        roles: [
-          {
-            title: 'Software Development for ECU Testing',
-            period: 'Jan 2024 - Apr 2025',
-            description: 'Developed software tools for automated testing of electronic control units (ECUs) in advanced driver assistance systems.',
-            technologies: ['C++', 'Python', 'Automotive Systems', 'ECU Testing', 'ADAS']
-          },
-          {
-            title: 'Data Analysis for Vehicle Dynamics',
-            period: 'May 2023 - Dec 2023',
-            description: 'Analyzed and visualized vehicle dynamics data to improve simulation models for autonomous driving scenarios.',
-            technologies: ['Data Analysis', 'Python', 'MATLAB', 'Vehicle Dynamics', 'Autonomous Driving']
-          },
-          {
-            title: 'Embedded Systems Programming',
-            period: 'Sep 2022 - Apr 2023',
-            description: 'Implemented embedded systems solutions for automotive applications, focusing on real-time performance and reliability.',
-            technologies: ['Embedded Systems', 'C', 'Real-time Systems', 'Automotive Architecture']
-          }
-        ],
-        technologies: ['Software Development', 'Embedded Systems', 'C/C++', 'Automotive Systems', 'Data Analysis', 'ADAS', 'Automotive Architecture']
-      },
-      {
-        id: 2,
-        company: 'DHBW Engineering',
-        position: 'Lead CFD Engineer',
-        period: '2023 - 2025',
-        description: 'Led a team focused on Computational Fluid Dynamics (CFD) simulations, overseeing project planning, task delegation, and technical implementation of simulation models.',
-        technologies: ['CFD', 'Team Leadership', 'Project Management', 'Simulation', 'IT Infrastructure', 'Data Analysis']
-      }
-    ];
-  }
+  return [
+    {
+      id: 1,
+      company: 'Mercedes Benz',
+      period: '2022 - 2025',
+      position: 'Corporate Student - Computer Science', // For backward compatibility
+      description: 'Participated in a dual study program combining theoretical education with practical work experience at Mercedes Benz.', // For backward compatibility
+      roles: [
+        {
+          title: 'Software Development for ECU Testing',
+          period: 'Jan 2024 - Apr 2025',
+          description: 'Developed software tools for automated testing of electronic control units (ECUs) in advanced driver assistance systems.',
+          technologies: ['C++', 'Python', 'Automotive Systems', 'ECU Testing', 'ADAS']
+        },
+        {
+          title: 'Data Analysis for Vehicle Dynamics',
+          period: 'May 2023 - Dec 2023',
+          description: 'Analyzed and visualized vehicle dynamics data to improve simulation models for autonomous driving scenarios.',
+          technologies: ['Data Analysis', 'Python', 'MATLAB', 'Vehicle Dynamics', 'Autonomous Driving']
+        },
+        {
+          title: 'Embedded Systems Programming',
+          period: 'Sep 2022 - Apr 2023',
+          description: 'Implemented embedded systems solutions for automotive applications, focusing on real-time performance and reliability.',
+          technologies: ['Embedded Systems', 'C', 'Real-time Systems', 'Automotive Architecture']
+        }
+      ],
+      technologies: ['Software Development', 'Embedded Systems', 'C/C++', 'Automotive Systems', 'Data Analysis', 'ADAS', 'Automotive Architecture']
+    },
+    {
+      id: 2,
+      company: 'DHBW Engineering e.V.',
+      roles: [
+        {
+          title: 'Lead CFD Engineer',
+          period: 'Sep 2023 - Apr 2025',
+          description: 'Led a team focused on Computational Fluid Dynamics (CFD) simulations, overseeing project planning, task delegation, and technical implementation of simulation models.',
+          technologies: ['CFD', 'Team Leadership', 'Project Management', 'Simulation', 'OpenFOAM', 'Paraview']
+        },
+        {
+          title: 'IT Infrastructure Manager',
+          period: 'Feb 2023 - Aug 2023',
+          description: 'Managed and optimized computing resources for simulation workflows, implemented version control systems, and developed automation scripts for data processing.',
+          technologies: ['Linux', 'Bash Scripting', 'High Performance Computing', 'Git', 'CI/CD', 'Python']
+        }
+      ],
+      // For backward compatibility
+      position: 'Lead CFD Engineer',
+      period: '2023 - 2025',
+      description: 'Led engineering teams and managed IT infrastructure for Formula Student racing team projects.',
+      technologies: ['CFD', 'Team Leadership', 'Project Management', 'Simulation', 'IT Infrastructure', 'Linux', 'HPC']
+    }
+  ];
 }
 
 export async function fetchEducation() {
-  try {
-    const client = getDirectusClient();
-    const education = await client.request(
-      readItems('education', {
-        sort: ['sort'],
-      })
-    );
-    return education;
-  } catch (error) {
-    console.error('Error fetching education:', error);
-    // Return default education data if API call fails
     return [
       {
         id: 1,
@@ -178,21 +145,9 @@ export async function fetchEducation() {
       }
     ];
   }
-}
+
 
 export async function fetchSkillCategories() {
-  try {
-    const client = getDirectusClient();
-    const skillCategories = await client.request(
-      readItems('skill_categories', {
-        sort: ['sort'],
-        fields: ['*', { skills: ['*'] }]
-      })
-    );
-    return skillCategories;
-  } catch (error) {
-    console.error('Error fetching skill categories:', error);
-    // Return default skill categories if API call fails
     return [
       {
         id: 1,
@@ -247,39 +202,3 @@ export async function fetchSkillCategories() {
       }
     ];
   }
-}
-
-export async function fetchContactInfo() {
-  try {
-    const client = getDirectusClient();
-    const contactInfo = await client.request(
-      readItems('contact', {
-        sort: ['sort'],
-      })
-    );
-    return contactInfo;
-  } catch (error) {
-    console.error('Error fetching contact info:', error);
-    // Return default contact info if API call fails
-    return [
-      {
-        id: 1,
-        label: 'Email',
-        value: 'philipp@gehrig.info',
-        icon: '📧'
-      },
-      {
-        id: 2,
-        label: 'Phone',
-        value: '+49 151 68195162',
-        icon: '📱'
-      },
-      {
-        id: 3,
-        label: 'Location',
-        value: 'Germany',
-        icon: '📍'
-      }
-    ];
-  }
-}

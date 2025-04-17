@@ -11,13 +11,18 @@
   },
   "dependencies": {
     "@directus/sdk": "^19.1.0",
+    "@nuxt/content": "^3.4.0",
+    "@nuxtjs/tailwindcss": "^6.13.2",
+    "@vueuse/head": "vueuse/head",
     "nuxt": "^3.16.2",
+    "prismjs": "^1.30.0",
+    "rehype-external-links": "^3.0.0",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.0",
-    "@nuxtjs/tailwindcss": "^6.13.2"
+    "vue-router": "^4.5.0"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^22.14.1",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.3",

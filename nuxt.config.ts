@@ -6,15 +6,11 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
   ],
   // Add runtime config for API URL
-  runtimeConfig: {
-    public: {
-      directusUrl: process.env.DIRECTUS_URL || 'http://localhost:8055',
-    }
-  },
+  runtimeConfig: {},
   // Optimize data fetching
   vite: {
     optimizeDeps: {
       include: ['@directus/sdk']
     }
-  }
+  },
 })
