@@ -101,7 +101,7 @@ describe('AboutSection', () => {
         profile_image: null,
         linkedin: 'https://linkedin.com/in/philippgehrig',
         github: 'https://github.com/philippgehrig',
-        twitter: 'https://twitter.com/philippgehrig'
+        twitter: 'https://twitter.com/thisphilipp'
       },
       isLoading: false,
       error: null
@@ -111,5 +111,68 @@ describe('AboutSection', () => {
     
     expect(wrapper.find('img').exists()).toBe(false)
     expect(wrapper.find('svg').exists()).toBe(true)
+  })
+
+  it('handles content overflow correctly', async () => {
+    // Override mock with very long bio to test overflow handling
+    useProfileMock.mockReturnValueOnce({
+      profile: {
+        name: 'Philipp Gehrig',
+        title: 'Engineer & Web Developer',
+        bio: 'A passionate engineer and web developer with expertise in Computational Fluid Dynamics and modern web development.'.repeat(10),
+        profile_image: '/images/Philipp-Gehrig_2025.png',
+        linkedin: 'https://linkedin.com/in/philippgehrig',
+        github: 'https://github.com/philippgehrig',
+        twitter: 'https://twitter.com/thisphilipp'
+      },
+      isLoading: false,
+      error: null
+    })
+
+    const wrapper = mount(AboutSection)
+    
+    // Verify the bio paragraph exists and contains the content
+    const bioElement = wrapper.find('p')
+    expect(bioElement.exists()).toBe(true)
+    expect(bioElement.classes()).toContain('text-lg')
+    
+    // Check that the container has appropriate max-width class to prevent horizontal overflow
+    expect(wrapper.find('.max-w-3xl').exists()).toBe(true)
+  })
+
+  it('handles long content with proper scrollbar behavior', async () => {
+    // Override mock with extremely long bio to force scrolling
+    useProfileMock.mockReturnValueOnce({
+      profile: {
+        name: 'Philipp Gehrig',
+        title: 'Engineer & Web Developer',
+        bio: 'A passionate engineer and web developer with expertise in Computational Fluid Dynamics and modern web development.'.repeat(20),
+        profile_image: '/images/Philipp-Gehrig_2025.png',
+        linkedin: 'https://linkedin.com/in/philippgehrig',
+        github: 'https://github.com/philippgehrig',
+        twitter: 'https://twitter.com/thisphilipp'
+      },
+      isLoading: false,
+      error: null
+    })
+
+    const wrapper = mount(AboutSection)
+    
+    // Check that the bio content exists
+    const bioElement = wrapper.find('p')
+    expect(bioElement.exists()).toBe(true)
+    
+    // Check that the container has proper classes for handling overflow
+    expect(wrapper.find('.max-w-3xl').exists()).toBe(true)
+    
+    // Check that long text is contained within a paragraph with proper styling
+    expect(bioElement.classes()).toContain('text-lg')
+    expect(bioElement.classes()).toContain('leading-relaxed')
+    
+    // Verify container hierarchy for proper scroll handling
+    const container = wrapper.find('.container')
+    expect(container.exists()).toBe(true)
+    expect(container.classes()).toContain('mx-auto')
+    expect(container.classes()).toContain('px-6')
   })
 })

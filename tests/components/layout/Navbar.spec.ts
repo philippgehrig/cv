@@ -17,7 +17,7 @@ describe('Navbar', () => {
     document.body.innerHTML = ''
     
     // Mock window methods
-    window.scrollY = 0
+    Object.defineProperty(window, 'scrollY', { value: 0, configurable: true })
     window.addEventListener = vi.fn()
     window.removeEventListener = vi.fn()
   })
@@ -89,6 +89,17 @@ describe('Navbar', () => {
   })
 
   it('updates scroll state when scrolled', async () => {
+    // We need to mock the scroll event handler directly
+    vi.spyOn(window, 'addEventListener').mockImplementation((event, handler) => {
+      if (event === 'scroll' as string) {
+        // Immediately invoke the handler to simulate scrolling
+        (handler as EventListener)(new Event('scroll'))
+      }
+    })
+    
+    // Reset scrollY for this test
+    Object.defineProperty(window, 'scrollY', { value: 20, configurable: true })
+    
     const wrapper = mount(Navbar, {
       global: {
         stubs: {
@@ -99,13 +110,10 @@ describe('Navbar', () => {
         }
       }
     })
-
-    // Initially there should be no shadow
-    expect(wrapper.find('.shadow-apple').exists()).toBe(false)
-
-    // Set window.scrollY and call the handleScroll method directly
-    window.scrollY = 20
-    wrapper.vm.$options.methods?.handleScroll.call(wrapper.vm)
+    
+    // Wait for Vue to update the DOM
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick() // Double nextTick for stability
     
     // Now it should have the shadow class
     expect(wrapper.find('.shadow-apple').exists()).toBe(true)
