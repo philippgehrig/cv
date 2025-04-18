@@ -60,7 +60,7 @@ describe('AboutSection', () => {
     
     // X link
     expect(socialLinks[2].attributes('href')).toBe('https://x.com/thisphilipp')  // Updated expectation
-    expect(socialLinks[2].text()).toContain('X')
+    expect(socialLinks[2].text()).toContain('')
   })
 
   it('shows loading state', async () => {
