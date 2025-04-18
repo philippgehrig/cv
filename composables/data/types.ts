@@ -8,7 +8,7 @@ export interface Profile {
   profile_image?: string;
   linkedin?: string;
   github?: string;
-  twitter?: string;
+  x?: string;
 }
 
 export interface Role {

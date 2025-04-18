@@ -8,5 +8,5 @@ export const profileData: Profile = {
   profile_image: '/images/Philipp-Gehrig_2025.png',
   linkedin: 'https://linkedin.com/in/philippgehrig',
   github: 'https://github.com/philippgehrig',
-  twitter: 'https://twitter.com/thisphilipp'
+  x: 'https://x.com/thisphilipp'
 };

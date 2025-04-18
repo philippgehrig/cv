@@ -14,7 +14,7 @@ useProfileMock.mockReturnValue({
     profile_image: '/images/Philipp-Gehrig_2025.png',
     linkedin: 'https://linkedin.com/in/philippgehrig',
     github: 'https://github.com/philippgehrig',
-    twitter: 'https://twitter.com/thisphilipp' 
+    x: 'https://x.com/thisphilipp' 
   },
   isLoading: false,
   error: null
@@ -58,9 +58,9 @@ describe('AboutSection', () => {
     expect(socialLinks[1].attributes('href')).toBe('https://github.com/philippgehrig')
     expect(socialLinks[1].text()).toContain('GitHub')
     
-    // Twitter link
-    expect(socialLinks[2].attributes('href')).toBe('https://twitter.com/thisphilipp')  // Updated expectation
-    expect(socialLinks[2].text()).toContain('Twitter')
+    // X link
+    expect(socialLinks[2].attributes('href')).toBe('https://x.com/thisphilipp')  // Updated expectation
+    expect(socialLinks[2].text()).toContain('X')
   })
 
   it('shows loading state', async () => {
@@ -101,7 +101,7 @@ describe('AboutSection', () => {
         profile_image: null,
         linkedin: 'https://linkedin.com/in/philippgehrig',
         github: 'https://github.com/philippgehrig',
-        twitter: 'https://twitter.com/thisphilipp'
+        x: 'https://x.com/thisphilipp'
       },
       isLoading: false,
       error: null
@@ -123,7 +123,7 @@ describe('AboutSection', () => {
         profile_image: '/images/Philipp-Gehrig_2025.png',
         linkedin: 'https://linkedin.com/in/philippgehrig',
         github: 'https://github.com/philippgehrig',
-        twitter: 'https://twitter.com/thisphilipp'
+        x: 'https://x.com/thisphilipp'
       },
       isLoading: false,
       error: null
@@ -150,7 +150,7 @@ describe('AboutSection', () => {
         profile_image: '/images/Philipp-Gehrig_2025.png',
         linkedin: 'https://linkedin.com/in/philippgehrig',
         github: 'https://github.com/philippgehrig',
-        twitter: 'https://twitter.com/thisphilipp'
+        x: 'https://x.com/thisphilipp'
       },
       isLoading: false,
       error: null
