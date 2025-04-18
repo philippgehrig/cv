@@ -94,6 +94,7 @@ The website includes a blog system that supports:
 - Table of contents generation
 - Pagination for blog listings
 - Search functionality
+- Bilingual content support (English/German)
 
 ### Adding Blog Posts
 
@@ -147,6 +148,78 @@ const post = {
 };
 </script>
 ```
+
+### Bilingual Blog Posts
+
+For posts that need to be available in multiple languages (currently English and German), use the following template:
+
+```vue
+<template>
+  <BlogPostLayout :post="post">
+    <!-- Apple-styled language selector -->
+    <div class="mb-8 flex justify-center">
+      <div class="inline-flex items-center px-3 py-1.5 bg-apple-gray-100 rounded-full">
+        <button 
+          @click="language = 'en'" 
+          class="px-3 py-1 text-sm font-medium transition-all duration-200 rounded-full"
+          :class="language === 'en' ? 'bg-white text-apple-gray-900 shadow-sm' : 'text-apple-gray-600 hover:text-apple-gray-900'"
+          aria-label="English"
+        >
+          English
+        </button>
+        <span class="mx-1 text-apple-gray-300">|</span>
+        <button 
+          @click="language = 'de'" 
+          class="px-3 py-1 text-sm font-medium transition-all duration-200 rounded-full"
+          :class="language === 'de' ? 'bg-white text-apple-gray-900 shadow-sm' : 'text-apple-gray-600 hover:text-apple-gray-900'"
+          aria-label="Deutsch"
+        >
+          Deutsch
+        </button>
+      </div>
+    </div>
+    
+    <!-- English content -->
+    <div v-if="language === 'en'">
+      <h1>Your English Title</h1>
+      
+      <p>
+        English content goes here...
+      </p>
+      
+      <!-- More English content sections -->
+    </div>
+    
+    <!-- German content -->
+    <div v-if="language === 'de'">
+      <h1>Your German Title</h1>
+      
+      <p>
+        German content goes here...
+      </p>
+      
+      <!-- More German content sections -->
+    </div>
+  </BlogPostLayout>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+
+// Language state
+const language = ref('en');
+
+// Post metadata
+const post = {
+  title: "Your Post Title", // This will display in the header
+  description: "Your post description",
+  date: "YYYY-MM-DDT00:00:00.000Z",
+  tags: ["tag1", "tag2", "english", "deutsch"] // Include language tags
+};
+</script>
+```
+
+The language selector will allow visitors to switch between languages while staying on the same page. Default language is English.
 
 3. The blog post will automatically appear in the blog listing page with pagination and search functionality.
 
