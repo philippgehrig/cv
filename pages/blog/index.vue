@@ -122,15 +122,15 @@ const blogPosts = [
     title: "Welcome to My Blog",
     description: "An introduction to my blog, what to expect, and the topics I'll be covering",
     date: "2025-04-17T08:00:00.000Z",
-    tags: ["introduction", "personal", "blog", "english"],
+    tags: ["introduction", "personal", "blog", "english", "deutsch"], 
     path: "/blog/posts/welcome-to-my-blog",
     slug: "welcome-to-my-blog"
   },
   {
-    title: "Introduction to the Basics of CFD Simulations",
-    description: "Learn the fundamental concepts of Computational Fluid Dynamics (CFD) and how these simulations help engineers solve complex flow problems",
-    date: "2025-04-17T10:00:00.000Z",
-    tags: ["engineering", "cfd", "fluid-dynamics", "simulation"],
+    title: "Building a Multi-Agent Service Architecture with Laravel Queue Workers for CFD Simulations",
+    description: "Explore how a modular queue-based architecture orchestrates complex CFD simulation workflows using Laravel and SQL database for efficient distributed computing.",
+    date: "2025-04-18T09:00:00.000Z",
+    tags: ["laravel", "cfd", "distributed-computing", "engineering", "queue-workers", "english", "deutsch"],
     path: "/blog/posts/introduction-to-cfd-simulations-basics",
     slug: "introduction-to-cfd-simulations-basics"
   }

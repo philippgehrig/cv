@@ -49,6 +49,7 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, nextTick } from 'vue';
 const { $highlightCode } = useNuxtApp();
 
 // Post metadata props
@@ -71,9 +72,13 @@ const formatDate = (dateString: string) => {
   }).format(date);
 };
 
-onMounted(() => {
+onMounted(async () => {
+  // Wait for the DOM to be fully updated
+  await nextTick();
   // Apply syntax highlighting after component is mounted
-  $highlightCode();
+  if ($highlightCode) {
+    $highlightCode();
+  }
 });
 
 // Update page metadata
@@ -174,10 +179,6 @@ useHead({
   font-weight: 600;
 }
 
-.syntax-highlight .line-numbers .line-numbers-rows {
-  border-right: 1px solid #d1d5db;
-}
-
 /* Copy button styling */
 .syntax-highlight .toolbar-item button {
   color: #6b7280;
@@ -195,8 +196,63 @@ useHead({
   color: #374151;
 }
 
-/* Add line numbers to all code blocks */
-.syntax-highlight pre[class*="language-"] {
-  padding-left: 3.5rem;
+/* PHP syntax highlighting enhancements */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6a737d;
+}
+
+.token.punctuation {
+  color: #24292e;
+}
+
+.token.namespace {
+  opacity: 0.7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #005cc5;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #22863a;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #d73a49;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #d73a49;
+}
+
+.token.function,
+.token.class-name {
+  color: #6f42c1;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #e36209;
 }
 </style>

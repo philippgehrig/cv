@@ -15,10 +15,7 @@ import 'prismjs/components/prism-markdown';
 import 'prismjs/components/prism-markup';  // HTML
 import 'prismjs/components/prism-jsx';     // JSX
 import 'prismjs/components/prism-tsx';     // TSX
-
-// Import line numbers plugin
-import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
-import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
+import 'prismjs/components/prism-php';     // PHP
 
 // Import toolbar plugin
 import 'prismjs/plugins/toolbar/prism-toolbar.css';
@@ -34,6 +31,22 @@ export default defineNuxtPlugin(() => {
       highlightCode: () => {
         // Need to run this in the next tick after DOM is updated
         window.setTimeout(() => {
+          // Remove line-numbers class from all pre elements
+          document.querySelectorAll('pre.line-numbers').forEach(block => {
+            block.classList.remove('line-numbers');
+          });
+          
+          // Set data-language attribute for labeling code blocks
+          document.querySelectorAll('pre[class*="language-"]').forEach(pre => {
+            const language = Array.from(pre.classList)
+              .find(className => className.startsWith('language-'))
+              ?.replace('language-', '');
+            if (language) {
+              pre.setAttribute('data-language', language);
+            }
+          });
+          
+          // Explicitly run syntax highlighting
           Prism.highlightAll();
         }, 0);
       }
