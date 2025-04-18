@@ -63,8 +63,7 @@
               class="inline-flex items-center px-4 py-2 rounded-full bg-black text-white text-sm font-medium hover:bg-gray-800 transition-colors duration-300"
               aria-label="X"
             >
-              <IconX class="h-5 w-5 mr-2" />
-              <span>X</span>
+              <IconX class="h-5 w-5 mr-1 ml-1" />
             </a>
           </div>
         </div>
