@@ -122,7 +122,7 @@ const blogPosts = [
     title: "Welcome to My Blog",
     description: "An introduction to my blog, what to expect, and the topics I'll be covering",
     date: "2025-04-17T08:00:00.000Z",
-    tags: ["introduction", "personal", "blog"],
+    tags: ["introduction", "personal", "blog", "english"],
     path: "/blog/posts/welcome-to-my-blog",
     slug: "welcome-to-my-blog"
   },
