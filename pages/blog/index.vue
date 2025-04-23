@@ -133,6 +133,14 @@ const blogPosts = [
     tags: ["laravel", "cfd", "distributed-computing", "engineering", "queue-workers", "english", "deutsch"],
     path: "/blog/posts/introduction-to-cfd-simulations-basics",
     slug: "introduction-to-cfd-simulations-basics"
+  },
+  {
+    title: "Activation Functions in Neural Networks",
+    description: "An overview of activation functions for neural networks.",
+    date: "2025-04-23T08:00:00.000Z",
+    tags: ["neural-networks", "activation-functions", "english", "deutsch"],
+    path: "/blog/posts/activation-functions-in-neural-networks",
+    slug: "activation-functions-in-neural-networks"
   }
 ];
 

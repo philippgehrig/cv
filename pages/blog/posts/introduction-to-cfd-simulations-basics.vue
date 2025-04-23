@@ -47,8 +47,8 @@
         Laravel's robust queue system makes it straightforward to dispatch, delay, and manage background jobs across a distributed system. I'm using a SQL database as the queue backend for reliable job persistence, combined with Laravel's queue monitoring for insights. Each agent — the mesher, solver, and post-processor — listens to a dedicated queue and performs its specialized function independently.
       </p>
       
-      <div class="my-6 p-4 bg-gray-100 rounded-lg">
-        <p class="italic text-gray-700">
+      <div class="my-6 p-4 bg-apple-gray-100 rounded-xl shadow-apple">
+        <p class="italic text-apple-gray-700">
           "The right architecture doesn't just solve today's problems—it adapts to tomorrow's challenges."
         </p>
       </div>
@@ -159,8 +159,8 @@
         Das robuste Queue-System von Laravel macht es unkompliziert, Hintergrundjobs in einem verteilten System zu verteilen, zu verzögern und zu verwalten. Ich verwende eine SQL-Datenbank als Queue-Backend für zuverlässige Job-Persistenz, kombiniert mit Laravel's eigener Überwachungsfunktion für Einblicke. Jeder Agent – der Vernetzer, Löser und Nachbearbeiter – überwacht eine dedizierte Queue und führt seine spezialisierte Funktion unabhängig aus.
       </p>
       
-      <div class="my-6 p-4 bg-gray-100 rounded-lg">
-        <p class="italic text-gray-700">
+      <div class="my-6 p-4 bg-apple-gray-100 rounded-xl shadow-apple">
+        <p class="italic text-apple-gray-700">
           "Die richtige Architektur löst nicht nur die Probleme von heute – sie passt sich den Herausforderungen von morgen an."
         </p>
       </div>
