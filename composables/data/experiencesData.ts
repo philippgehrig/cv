@@ -4,33 +4,27 @@ export const experiencesData: Experience[] = [
   {
     id: 1,
     company: 'Mercedes Benz',
-    period: '2022 - 2025',
-    position: 'Corporate Student - Computer Science',
-    description: 'Participated in a dual study program combining theoretical education with practical work experience at Mercedes Benz. During this time I worked in various departments, focusing on software development, data analysis, and automotive systems.',
+    period: '2022 - Present',
+    position: 'System Architect & Technical Product Owner/Lead',
+    description: 'Started as a Corporate Student in a dual study program combining theoretical education with practical work experience at Mercedes Benz, working across various departments on software development, data analysis, and automotive systems. Transitioned into architecture and technical leadership roles after graduation.',
     roles: [
       {
-        title: 'Corporate Student - PoC for Zonal Architecture with PCIe',
-        period: 'April 2025 - Sep 2025',
-        description: 'Developed of a Proof of Concept for a zonal architecture solution with PCIe.',
-        technologies: ['PCIe', 'Bus Systems', 'ADAS', 'Linux Driver', 'C/C++', 'Hardware Architecture']
+        title: 'System Architect & Technical Product Owner/Lead',
+        period: 'Mar 2026 - Present',
+        description: 'Leading technical product ownership and system architecture for automotive software initiatives.',
+        technologies: ['System Architecture', 'Technical Leadership', 'Product Management', 'Automotive Software']
       },
       {
-        title: 'Corporate Student - CI/CD Engineer for ADAS Systems',
-        period: 'Dez 2025 - Feb 2025',
-        description: 'Developed software tools for automated flashing for ADAS systems, improving the efficiency of the testing process by 20%.',
-        technologies: ['BASH', 'CI/CD', 'ADAS', 'NVIDIA Jetson']
+        title: 'System Architect',
+        period: 'Oct 2025 - Feb 2026',
+        description: 'Defined and designed system architectures for automotive software components.',
+        technologies: ['System Architecture', 'Automotive Software', 'Hardware Architecture']
       },
       {
-        title: 'Corporate Student - KPI Analysis for SCRUM Sprints',
-        period: 'Jun 2024 - Sep 2024',
-        description: 'Automated the creation of key performance indicators (KPIs) for SCRUM sprints, increasing developer productivity by 5%.',
-        technologies: ['Data Analysis', 'Grafana', 'SCRUM', 'Jira', 'PostgreSQL', 'TypeScript']
-      },
-      {
-        title: 'Corporate Student - CAN Bus Communication via WiFi',
-        period: 'Nov 2023 - Apr 2024',
-        description: 'Implemented a solution for analysing CAN bus communication over WiFi, enhancing the debugging process for automotive systems.',
-        technologies: ['Embedded Systems', 'C/C++', 'CAN Bus', 'ESP32', 'WiFi', 'Automotive Systems']
+        title: 'Corporate Student',
+        period: '2022 - Sep 2025',
+        description: 'Participated in a dual study program, contributing to projects in embedded systems, CI/CD tooling, data analysis, and zonal E/E architecture.',
+        technologies: ['C/C++', 'PCIe', 'CAN Bus', 'Linux', 'CI/CD', 'ADAS', 'Grafana', 'TypeScript', 'Embedded Systems']
       }
     ],
   },
