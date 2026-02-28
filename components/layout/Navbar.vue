@@ -11,17 +11,19 @@
 
       <!-- Desktop nav -->
       <nav class="hidden md:flex items-center gap-1">
-        <NuxtLink
-          v-for="item in navItems"
-          :key="item.id"
-          :to="item.path"
-          class="px-3 py-1.5 text-sm rounded-md transition-all duration-200"
-          :class="isActive(item.path)
-            ? 'text-white bg-white/10'
-            : 'text-zinc-400 hover:text-zinc-100 hover:bg-white/5'"
-        >
-          {{ item.label }}
-        </NuxtLink>
+        <!-- Section anchors (only shown on home page) -->
+        <template v-if="isHomePage">
+          <a
+            v-for="item in anchorItems"
+            :key="item.id"
+            :href="item.href"
+            class="px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-zinc-400 hover:text-zinc-100 hover:bg-white/5"
+            :class="{ 'text-white bg-white/10': activeSection === item.id }"
+            @click.prevent="scrollToSection(item.id)"
+          >
+            {{ item.label }}
+          </a>
+        </template>
       </nav>
 
       <!-- Mobile menu button -->
@@ -50,16 +52,15 @@
     >
       <div v-if="mobileOpen" class="md:hidden bg-dark-800/95 backdrop-blur-xl border-b border-white/5">
         <nav class="max-w-6xl mx-auto px-6 py-3 flex flex-col gap-1">
-          <NuxtLink
-            v-for="item in navItems"
+          <a
+            v-for="item in anchorItems"
             :key="item.id"
-            :to="item.path"
-            class="px-3 py-2 text-sm rounded-md transition-all"
-            :class="isActive(item.path) ? 'text-white bg-white/10' : 'text-zinc-400 hover:text-zinc-100 hover:bg-white/5'"
-            @click="mobileOpen = false"
+            :href="item.href"
+            class="px-3 py-2 text-sm rounded-md transition-all text-zinc-400 hover:text-zinc-100 hover:bg-white/5"
+            @click.prevent="scrollToSection(item.id); mobileOpen = false"
           >
             {{ item.label }}
-          </NuxtLink>
+          </a>
         </nav>
       </div>
     </Transition>
@@ -67,23 +68,45 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const mobileOpen = ref(false);
 const scrolled = ref(false);
+const activeSection = ref('about');
 
-const navItems = [
-  { id: 'home', label: 'Home', path: '/' },
+const isHomePage = computed(() => route.path === '/');
+
+const anchorItems = [
+  { id: 'about',      label: 'About',      href: '#about' },
+  { id: 'experience', label: 'Experience', href: '#experience' },
+  { id: 'education',  label: 'Education',  href: '#education' },
+  { id: 'contact',    label: 'Contact',    href: '#contact' },
 ];
 
-const isActive = (path: string) => {
-  if (path === '/') return route.path === '/';
-  return route.path.startsWith(path);
+const scrollToSection = (id: string) => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 };
 
-const handleScroll = () => { scrolled.value = window.scrollY > 16; };
+const handleScroll = () => {
+  scrolled.value = window.scrollY > 16;
+
+  // Update active section based on scroll position
+  const sections = anchorItems.map(item => document.getElementById(item.id));
+  const scrollY = window.scrollY + 80; // offset for navbar height
+
+  for (let i = sections.length - 1; i >= 0; i--) {
+    const section = sections[i];
+    if (section && section.offsetTop <= scrollY) {
+      activeSection.value = anchorItems[i].id;
+      break;
+    }
+  }
+};
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll, { passive: true });

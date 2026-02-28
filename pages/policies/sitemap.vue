@@ -1,67 +1,35 @@
 <template>
-  <div class="min-h-screen bg-white">
-    <div class="py-20 md:py-32 bg-white">
-      <div class="container mx-auto px-6 max-w-4xl">
-        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-center mb-16 text-apple-gray-900">Sitemap</h1>
-        
-        <div class="max-w-2xl mx-auto">
-          <ul class="space-y-8">
-            <li class="border-b border-apple-gray-100 pb-8">
-              <h2 class="text-2xl font-semibold text-apple-gray-800 mb-4">Main Pages</h2>
-              <ul class="space-y-3 text-apple-gray-600">
-                <li>
-                  <NuxtLink to="/" class="text-apple-blue hover:underline inline-flex items-center">
-                    <span class="mr-2">Home</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </NuxtLink>
-                  <p class="text-sm text-apple-gray-500 mt-1">My personal CV and professional information</p>
-                </li>
-              </ul>
-            </li>
-            
+  <div class="min-h-screen pt-24 pb-16">
+    <div class="max-w-3xl mx-auto px-6">
+      <h1 class="text-4xl font-bold tracking-tight text-zinc-50 mb-12">Sitemap</h1>
 
+      <div class="space-y-10">
+        <div>
+          <h2 class="text-lg font-semibold text-zinc-200 mb-4">Main Pages</h2>
+          <ul class="space-y-3">
             <li>
-              <h2 class="text-2xl font-semibold text-apple-gray-800 mb-4">Policy Pages</h2>
-              <ul class="space-y-3 text-apple-gray-600">
-                <li>
-                  <NuxtLink to="/policies/privacy-policy" class="text-apple-blue hover:underline inline-flex items-center">
-                    <span class="mr-2">Privacy Policy</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </NuxtLink>
-                  <p class="text-sm text-apple-gray-500 mt-1">Information about how I handle your data</p>
-                </li>
-                <li>
-                  <NuxtLink to="/policies/legal-notice" class="text-apple-blue hover:underline inline-flex items-center">
-                    <span class="mr-2">Legal Notice</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </NuxtLink>
-                  <p class="text-sm text-apple-gray-500 mt-1">Legal information about this website</p>
-                </li>
-                <li>
-                  <NuxtLink to="/policies/terms-of-use" class="text-apple-blue hover:underline inline-flex items-center">
-                    <span class="mr-2">Terms of Use</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </NuxtLink>
-                  <p class="text-sm text-apple-gray-500 mt-1">Rules and regulations for using this website</p>
-                </li>
-                <li>
-                  <NuxtLink to="/policies/sitemap" class="text-apple-blue hover:underline inline-flex items-center">
-                    <span class="mr-2">Sitemap</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </NuxtLink>
-                  <p class="text-sm text-apple-gray-500 mt-1">Overview of all pages on this website</p>
-                </li>
-              </ul>
+              <NuxtLink to="/" class="inline-flex items-center gap-2 text-sm text-accent hover:text-accent-light transition-colors">
+                Home
+                <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </NuxtLink>
+              <p class="text-xs text-zinc-500 mt-1">My personal CV and professional information</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="border-t border-white/5 pt-8">
+          <h2 class="text-lg font-semibold text-zinc-200 mb-4">Policy Pages</h2>
+          <ul class="space-y-4">
+            <li v-for="page in policyPages" :key="page.path">
+              <NuxtLink :to="page.path" class="inline-flex items-center gap-2 text-sm text-accent hover:text-accent-light transition-colors">
+                {{ page.label }}
+                <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </NuxtLink>
+              <p class="text-xs text-zinc-500 mt-1">{{ page.description }}</p>
             </li>
           </ul>
         </div>
@@ -75,4 +43,11 @@ definePageMeta({
   title: 'Sitemap',
   description: 'Overview of all pages on Philipp Gehrig\'s personal website'
 });
+
+const policyPages = [
+  { path: '/policies/privacy-policy', label: 'Privacy Policy', description: 'Information about how I handle your data' },
+  { path: '/policies/legal-notice',   label: 'Legal Notice',   description: 'Legal information about this website' },
+  { path: '/policies/terms-of-use',   label: 'Terms of Use',   description: 'Rules and regulations for using this website' },
+  { path: '/policies/sitemap',        label: 'Sitemap',        description: 'Overview of all pages on this website' },
+];
 </script>
