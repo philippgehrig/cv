@@ -1,150 +1,157 @@
-<!-- Apple-inspired Experience section component -->
 <template>
-  <section id="experience" class="py-20 md:py-32 bg-apple-gray-50">
-    <div class="container mx-auto px-6 max-w-6xl">
-      <h2 class="text-4xl md:text-5xl font-semibold tracking-tight text-center mb-16 text-apple-gray-900">Work Experience</h2>
-      
-      <div v-if="isLoading" class="max-w-3xl mx-auto">
-        <div v-for="i in 3" :key="i" class="mb-10 bg-white rounded-2xl shadow-apple p-6 animate-pulse">
-          <div class="h-7 bg-apple-gray-100 rounded-full w-2/3 mb-4"></div>
-          <div class="h-5 bg-apple-gray-100 rounded-full w-1/3 mb-6"></div>
-          <div class="space-y-3">
-            <div class="h-4 bg-apple-gray-100 rounded-full w-full"></div>
-            <div class="h-4 bg-apple-gray-100 rounded-full w-5/6"></div>
-            <div class="h-4 bg-apple-gray-100 rounded-full w-3/4"></div>
+  <section id="experience" class="py-24 relative">
+    <!-- Section separator -->
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+
+    <div class="max-w-6xl mx-auto px-6">
+      <!-- Header -->
+      <div class="mb-16">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="inline-block w-6 h-px bg-accent"></span>
+          <span class="text-xs font-mono tracking-widest text-accent uppercase">Career</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-zinc-50">Work Experience</h2>
+      </div>
+
+      <!-- Skeleton -->
+      <div v-if="isLoading" class="space-y-6">
+        <div v-for="i in 2" :key="i" class="animate-pulse rounded-xl border border-white/5 bg-dark-800 p-6">
+          <div class="h-5 w-2/5 bg-white/10 rounded mb-3"></div>
+          <div class="h-4 w-1/4 bg-white/10 rounded mb-6"></div>
+          <div class="space-y-2">
+            <div class="h-3 w-full bg-white/10 rounded"></div>
+            <div class="h-3 w-5/6 bg-white/10 rounded"></div>
           </div>
         </div>
       </div>
-      
-      <div v-else-if="experiences.length > 0" class="max-w-3xl mx-auto">
-        <div 
-          v-for="(job, index) in experiences" 
-          :key="job.id" 
-          class="mb-10 bg-white rounded-2xl shadow-apple p-6 md:p-8 transform transition-all duration-300 hover:shadow-apple-hover hover:translate-y-[-4px]"
+
+      <!-- Experience entries -->
+      <div v-else-if="experiences.length > 0" class="space-y-6">
+        <div
+          v-for="job in experiences"
+          :key="job.id"
+          class="rounded-xl border border-white/5 bg-dark-800/60 backdrop-blur-sm p-6 md:p-8 hover:border-white/10 hover:bg-dark-800 transition-all duration-300 group"
         >
           <!-- Company header -->
-          <div class="flex flex-col space-y-3 mb-6">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-              <!-- Show overall position if there are no roles, or company name if there are roles -->
-              <h3 class="text-2xl font-semibold tracking-tight text-apple-gray-900">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+            <div>
+              <h3 class="text-xl font-semibold text-zinc-50">
                 {{ job.roles && job.roles.length > 0 ? job.company : job.position }}
               </h3>
-              <!-- Company logo if available -->
-              <div v-if="getCompanyLogo(job.company)" class="mt-2 sm:mt-0">
-                <img 
-                  :src="getCompanyLogo(job.company) || undefined"
-                  :alt="`${job.company} logo`" 
-                  class="h-10 object-contain"
-                />
-              </div>
+              <p class="text-sm text-zinc-500 mt-1">
+                {{ job.roles && job.roles.length > 0 ? job.position : job.company }}
+              </p>
             </div>
-            <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-0 sm:justify-between">
-              <!-- Company name (if traditional job entry without roles) -->
-              <h4 v-if="!job.roles || job.roles.length === 0" class="text-lg text-apple-gray-600">{{ job.company }}</h4>
-              <!-- Program title if there are roles -->
-              <h4 v-else class="text-lg text-apple-gray-600">{{ job.position || 'Corporate Student' }}</h4>
-              <span class="inline-flex items-center px-3 py-1 rounded-full bg-apple-blue/10 text-apple-blue text-sm font-medium">
+            <div class="flex items-center gap-3 flex-shrink-0">
+              <img
+                v-if="getCompanyLogo(job.company)"
+                :src="getCompanyLogo(job.company) || undefined"
+                :alt="`${job.company} logo`"
+                class="h-7 object-contain opacity-70 group-hover:opacity-100 transition-opacity"
+              />
+              <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-accent/10 border border-accent/20 text-xs font-mono text-accent whitespace-nowrap">
                 {{ job.period }}
               </span>
             </div>
           </div>
-          
-          <!-- Display job description for traditional entries -->
+
+          <!-- Simple job (no roles) -->
           <div v-if="!job.roles || job.roles.length === 0">
-            <p class="text-apple-gray-500 leading-relaxed mb-6">{{ job.description }}</p>
-            
-            <div v-if="job.technologies && job.technologies.length > 0" class="flex flex-wrap gap-2">
-              <span 
-                v-for="(tech, techIndex) in job.technologies" 
-                :key="techIndex" 
-                class="px-3 py-1 rounded-full bg-apple-gray-100 text-apple-gray-600 text-sm"
-              >
-                {{ tech }}
-              </span>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-4">{{ job.description }}</p>
+            <div v-if="job.technologies?.length" class="flex flex-wrap gap-2">
+              <span
+                v-for="(tech, i) in job.technologies"
+                :key="i"
+                class="px-2.5 py-0.5 rounded-md bg-white/5 border border-white/10 text-xs text-zinc-400"
+              >{{ tech }}</span>
             </div>
           </div>
-          
-          <!-- Display multiple roles if present -->
-          <div v-else class="space-y-6">
-            <!-- General company description if available -->
-            <p v-if="job.description" class="text-apple-gray-500 leading-relaxed">{{ job.description }}</p>
-            
-            <!-- Individual roles -->
-            <div 
-              v-for="(role, roleIndex) in job.roles" 
-              :key="roleIndex" 
-              class="border-l-4 border-apple-gray-200 pl-4 py-2 group relative hover:bg-apple-gray-50 rounded-r-lg transition-all duration-300"
+
+          <!-- Multi-role job -->
+          <div v-else class="space-y-1">
+            <p v-if="job.description" class="text-zinc-400 text-sm leading-relaxed mb-5">{{ job.description }}</p>
+
+            <div
+              v-for="(role, ri) in job.roles"
+              :key="ri"
+              class="group/role border-l border-white/10 pl-4 py-3 hover:border-accent/50 transition-all duration-200 cursor-pointer"
+              @click="toggleRole(job.id, ri)"
             >
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                <h4 class="text-lg font-medium text-apple-gray-800">{{ role.title }}</h4>
-                <span class="text-sm text-apple-blue mt-1 sm:mt-0">{{ role.period }}</span>
-              </div>
-              
-              <!-- Role description - hidden by default, visible on hover -->
-              <div class="overflow-hidden transition-all duration-300 max-h-0 group-hover:max-h-96 opacity-0 group-hover:opacity-100">
-                <p class="text-apple-gray-500 leading-relaxed mb-3 pt-3">{{ role.description }}</p>
-                
-                <div v-if="role.technologies && role.technologies.length > 0" class="flex flex-wrap gap-2">
-                  <span 
-                    v-for="(tech, techIndex) in role.technologies" 
-                    :key="techIndex" 
-                    class="px-3 py-1 rounded-full bg-apple-gray-100 text-apple-gray-600 text-sm"
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                <h4 class="text-sm font-medium text-zinc-200 group-hover/role:text-white transition-colors">
+                  {{ role.title }}
+                </h4>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-mono text-zinc-500">{{ role.period }}</span>
+                  <svg
+                    class="w-3.5 h-3.5 text-zinc-600 group-hover/role:text-zinc-400 transition-all duration-200"
+                    :class="{ 'rotate-180': isRoleOpen(job.id, ri) }"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   >
-                    {{ tech }}
-                  </span>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                  </svg>
                 </div>
               </div>
-              
-              <!-- Hover hint - optional -->
-              <span 
-                class="absolute right-2 bottom-2 text-xs text-apple-gray-400 opacity-0 group-hover:opacity-0 transition-opacity duration-300"
+
+              <!-- Expandable detail -->
+              <Transition
+                enter-active-class="transition-all duration-300 ease-smooth overflow-hidden"
+                enter-from-class="opacity-0 max-h-0"
+                enter-to-class="opacity-100 max-h-64"
+                leave-active-class="transition-all duration-200 ease-smooth overflow-hidden"
+                leave-from-class="opacity-100 max-h-64"
+                leave-to-class="opacity-0 max-h-0"
               >
-                Hover to see details
-              </span>
+                <div v-if="isRoleOpen(job.id, ri)" class="mt-3">
+                  <p class="text-sm text-zinc-400 leading-relaxed mb-3">{{ role.description }}</p>
+                  <div v-if="role.technologies?.length" class="flex flex-wrap gap-1.5">
+                    <span
+                      v-for="(tech, ti) in role.technologies"
+                      :key="ti"
+                      class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-xs text-zinc-400"
+                    >{{ tech }}</span>
+                  </div>
+                </div>
+              </Transition>
             </div>
           </div>
         </div>
       </div>
-      
-      <div v-else-if="error" class="text-center">
-        <p class="text-lg text-red-500">Error loading experience data. Please try again later.</p>
-      </div>
-      
-      <div v-else class="text-center">
-        <p class="text-lg text-apple-gray-500">No experience information available.</p>
+
+      <div v-else-if="error" class="text-red-400 text-sm">
+        Error loading experience data. Please try again later.
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useExperiences } from '~/composables/useExperiences';
 
 const { experiences, isLoading, error } = useExperiences();
 
-/**
- * Returns the appropriate logo path based on company name
- */
-function getCompanyLogo(company: string): string | null {
-  const companyLower = company.toLowerCase();
-  
-  if (companyLower.includes('mercedes') || companyLower.includes('benz')) {
-    return '/images/logos/mercedes-benz.png';
-  } else if (companyLower.includes('dhbw') && companyLower.includes('engineering')) {
-    return '/images/logos/dhbw-engineering.png';
-  } else if (companyLower.includes('dhbw')) {
-    return '/images/logos/dhbw.png';
+// Track which role rows are expanded: Map key = `${jobId}-${roleIndex}`
+const openRoles = ref(new Set<string>());
+
+const toggleRole = (jobId: number, roleIndex: number) => {
+  const key = `${jobId}-${roleIndex}`;
+  if (openRoles.value.has(key)) {
+    openRoles.value.delete(key);
+  } else {
+    openRoles.value.add(key);
   }
-  
-  // Add more company logos here as needed
-  
+};
+
+const isRoleOpen = (jobId: number, roleIndex: number) => {
+  return openRoles.value.has(`${jobId}-${roleIndex}`);
+};
+
+function getCompanyLogo(company: string): string | null {
+  const c = company.toLowerCase();
+  if (c.includes('mercedes') || c.includes('benz')) return '/images/logos/mercedes-benz.png';
+  if (c.includes('dhbw') && c.includes('engineering')) return '/images/logos/dhbw-engineering.png';
+  if (c.includes('dhbw')) return '/images/logos/dhbw.png';
   return null;
 }
 </script>
-
-<style scoped>
-/* Add smooth transition for role description reveal */
-.group:hover {
-  cursor: pointer;
-}
-</style>

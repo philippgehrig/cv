@@ -1,53 +1,49 @@
-<!-- Apple-inspired Education section component -->
 <template>
-  <section id="education" class="py-20 md:py-32 bg-white">
-    <div class="container mx-auto px-6 max-w-6xl">
-      <h2 class="text-4xl md:text-5xl font-semibold tracking-tight text-center mb-16 text-apple-gray-900">Education</h2>
-      
-      <div v-if="isLoading" class="max-w-3xl mx-auto">
-        <div v-for="i in 2" :key="i" class="mb-10 p-6 animate-pulse">
-          <div class="h-7 bg-apple-gray-100 rounded-lg w-2/3 mb-4"></div>
-          <div class="h-5 bg-apple-gray-100 rounded-lg w-1/3 mb-6"></div>
-          <div class="space-y-3">
-            <div class="h-4 bg-apple-gray-100 rounded-lg w-full"></div>
-            <div class="h-4 bg-apple-gray-100 rounded-lg w-5/6"></div>
-          </div>
+  <section id="education" class="py-24 relative">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+
+    <div class="max-w-6xl mx-auto px-6">
+      <!-- Header -->
+      <div class="mb-16">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="inline-block w-6 h-px bg-teal"></span>
+          <span class="text-xs font-mono tracking-widest text-teal uppercase">Academic</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-zinc-50">Education</h2>
+      </div>
+
+      <!-- Skeleton -->
+      <div v-if="isLoading" class="space-y-6">
+        <div v-for="i in 1" :key="i" class="animate-pulse rounded-xl border border-white/5 bg-dark-800 p-6">
+          <div class="h-4 w-1/4 bg-white/10 rounded mb-3"></div>
+          <div class="h-6 w-2/3 bg-white/10 rounded mb-2"></div>
+          <div class="h-4 w-1/3 bg-white/10 rounded mb-5"></div>
+          <div class="h-3 w-full bg-white/10 rounded"></div>
         </div>
       </div>
-      
-      <div v-else-if="education.length > 0" class="max-w-3xl mx-auto">
-        <div class="space-y-16">
-          <div 
-            v-for="(edu, index) in education" 
-            :key="edu.id" 
-            class="relative"
-          >
-            <!-- Apple-style timeline connector -->
-            <div v-if="index < education.length - 1" class="hidden md:block absolute left-1/2 top-full h-16 w-px bg-apple-gray-200"></div>
-            
-            <div class="flex flex-col md:flex-row md:items-center">
-              <div class="md:w-1/2 md:pr-8 mb-6 md:mb-0">
-                <span class="inline-flex items-center px-3 py-1 rounded-full bg-apple-blue/10 text-apple-blue text-sm font-medium mb-3">
-                  {{ edu.period }}
-                </span>
-                <h3 class="text-2xl font-semibold tracking-tight text-apple-gray-900 mb-2">{{ edu.degree }}</h3>
-                <h4 class="text-lg text-apple-gray-600">{{ edu.institution }}</h4>
-              </div>
-              
-              <div class="md:w-1/2 md:pl-8 border-l-0 md:border-l border-apple-gray-200">
-                <p class="text-apple-gray-500 leading-relaxed">{{ edu.description }}</p>
-              </div>
+
+      <!-- Entries -->
+      <div v-else-if="education.length > 0" class="space-y-6">
+        <div
+          v-for="edu in education"
+          :key="edu.id"
+          class="rounded-xl border border-white/5 bg-dark-800/60 backdrop-blur-sm p-6 md:p-8 hover:border-white/10 hover:bg-dark-800 transition-all duration-300"
+        >
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
+            <div>
+              <h3 class="text-xl font-semibold text-zinc-50">{{ edu.degree }}</h3>
+              <p class="text-sm text-zinc-500 mt-1">{{ edu.institution }}</p>
             </div>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-teal/10 border border-teal/20 text-xs font-mono text-teal whitespace-nowrap flex-shrink-0">
+              {{ edu.period }}
+            </span>
           </div>
+          <p class="text-sm text-zinc-400 leading-relaxed">{{ edu.description }}</p>
         </div>
       </div>
-      
-      <div v-else-if="error" class="text-center">
-        <p class="text-lg text-red-500">Error loading education data. Please try again later.</p>
-      </div>
-      
-      <div v-else class="text-center">
-        <p class="text-lg text-apple-gray-500">No education information available.</p>
+
+      <div v-else-if="error" class="text-red-400 text-sm">
+        Error loading education data.
       </div>
     </div>
   </section>
