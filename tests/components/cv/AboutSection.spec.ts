@@ -13,8 +13,7 @@ useProfileMock.mockReturnValue({
     bio: 'A passionate engineer and web developer with expertise in Computational Fluid Dynamics and modern web development.',
     profile_image: '/images/Philipp-Gehrig_2025.png',
     linkedin: 'https://linkedin.com/in/philippgehrig',
-    github: 'https://github.com/philippgehrig',
-    x: 'https://x.com/thisphilipp' 
+    github: 'https://github.com/philippgehrig'
   },
   isLoading: false,
   error: null
@@ -51,7 +50,7 @@ describe('AboutSection', () => {
     const wrapper = mount(AboutSection)
     
     const socialLinks = wrapper.findAll('a')
-    expect(socialLinks).toHaveLength(3)
+    expect(socialLinks).toHaveLength(2)
     
     // LinkedIn link
     expect(socialLinks[0].attributes('href')).toBe('https://linkedin.com/in/philippgehrig')
@@ -60,10 +59,6 @@ describe('AboutSection', () => {
     // GitHub link
     expect(socialLinks[1].attributes('href')).toBe('https://github.com/philippgehrig')
     expect(socialLinks[1].text()).toContain('GitHub')
-    
-    // X link
-    expect(socialLinks[2].attributes('href')).toBe('https://x.com/thisphilipp')  // Updated expectation
-    expect(socialLinks[2].text()).toContain('')
   })
 
   it('shows loading state', async () => {
