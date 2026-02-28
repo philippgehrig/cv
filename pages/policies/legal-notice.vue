@@ -8,7 +8,7 @@
           <h2 class="text-lg font-semibold text-zinc-200 mb-4">Information According to § 5 TMG</h2>
           <div class="rounded-xl border border-white/5 bg-dark-800/60 p-5">
             <p class="font-medium text-zinc-200 mb-2">Philipp Gehrig</p>
-            <p>Palmenwaldstraße 50 Apartment 404<br>73733 Esslingen<br>Germany</p>
+            <p>Finkenstraße 50<br>70794 Filderstadt<br>Germany</p>
             <p class="mt-3"><span class="text-zinc-300">Contact:</span><br>Email: philipp@gehrig.info<br>Phone: +49 151 68195162</p>
           </div>
         </div>
@@ -16,7 +16,7 @@
         <div>
           <h2 class="text-lg font-semibold text-zinc-200 mb-4">Responsible for Content According to § 55 Abs. 2 RStV</h2>
           <div class="rounded-xl border border-white/5 bg-dark-800/60 p-5">
-            <p>Philipp Gehrig<br>Palmenwaldstraße 50 Apartment 404<br>73733 Esslingen<br>Germany</p>
+            <p>Philipp Gehrig<br>Finkenstraße 50<br>70794 Filderstadt<br>Germany</p>
           </div>
         </div>
 
@@ -39,7 +39,7 @@
         </div>
 
         <div class="pt-6 border-t border-white/5 text-xs text-zinc-600">
-          Last updated: April 17, 2025
+          Last updated: February 28, 2026
         </div>
       </div>
     </div>
