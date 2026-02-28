@@ -47,7 +47,7 @@
                 v-if="getCompanyLogo(job.company)"
                 :src="getCompanyLogo(job.company) || undefined"
                 :alt="`${job.company} logo`"
-                class="h-7 object-contain opacity-70 group-hover:opacity-100 transition-opacity"
+                class="h-7 object-contain opacity-60 group-hover:opacity-90 transition-opacity logo-dark"
               />
               <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-accent/10 border border-accent/20 text-xs font-mono text-accent whitespace-nowrap">
                 {{ job.period }}
@@ -155,3 +155,12 @@ function getCompanyLogo(company: string): string | null {
   return null;
 }
 </script>
+
+<style scoped>
+/* Make logos with white/light backgrounds blend into the dark card.
+   mix-blend-mode: screen treats white as transparent and preserves colours. */
+.logo-dark {
+  mix-blend-mode: screen;
+  filter: brightness(0.9) contrast(1.1);
+}
+</style>
