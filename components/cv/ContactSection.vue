@@ -24,7 +24,7 @@
 
           <div class="space-y-4">
             <a
-              href="mailto:philippgehrig@icloud.com"
+              href="mailto:philipp@gehrig.info"
               class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-dark-800/60 hover:border-accent/30 hover:bg-dark-800 transition-all duration-200 group"
             >
               <div class="w-10 h-10 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
@@ -34,7 +34,7 @@
               </div>
               <div>
                 <p class="text-xs text-zinc-500 mb-0.5">Email</p>
-                <p class="text-sm text-zinc-200 group-hover:text-white transition-colors">philippgehrig@icloud.com</p>
+                <p class="text-sm text-zinc-200 group-hover:text-white transition-colors">philipp@gehrig.info</p>
               </div>
             </a>
 
@@ -87,7 +87,7 @@
           </p>
 
           <a
-            href="mailto:philippgehrig@icloud.com"
+            href="mailto:philipp@gehrig.info"
             class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-white text-sm font-medium hover:bg-accent-dark transition-all duration-200 shadow-glow-sm hover:shadow-glow"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
