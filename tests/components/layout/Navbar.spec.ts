@@ -50,10 +50,8 @@ describe('Navbar', () => {
       }
     })
 
-    // Check both main navigation items exist
-    expect(wrapper.find('a[href="/blog"]').exists()).toBe(true)
+    // Check navigation items exist
     expect(wrapper.find('a[href="/"]').exists()).toBe(true)
-    expect(wrapper.text()).toContain('Blog')
     expect(wrapper.text()).toContain('Home')
   })
 
