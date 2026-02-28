@@ -16,7 +16,7 @@
           <!-- Eyebrow -->
           <div class="flex items-center gap-3">
             <span class="inline-block w-6 h-px bg-accent"></span>
-            <span class="text-xs font-mono tracking-widest text-accent uppercase">Software Engineer</span>
+            <span class="text-xs font-mono tracking-widest text-accent uppercase">Technical Product Owner</span>
           </div>
 
           <!-- Name -->
