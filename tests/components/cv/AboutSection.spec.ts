@@ -29,9 +29,12 @@ describe('AboutSection', () => {
   it('renders profile information correctly', () => {
     const wrapper = mount(AboutSection)
 
-    expect(wrapper.find('h2').text()).toBe('About Me')
-    expect(wrapper.find('h3').text()).toBe('Philipp Gehrig')
-    expect(wrapper.find('h4').text()).toBe('Engineer & Web Developer')
+    // The component uses an <h1> for the name (split into first/last)
+    expect(wrapper.find('h1').exists()).toBe(true)
+    expect(wrapper.find('h1').text()).toContain('Philipp')
+    expect(wrapper.find('h1').text()).toContain('Gehrig')
+    // The title is rendered inside a pill/badge
+    expect(wrapper.text()).toContain('Engineer & Web Developer')
     expect(wrapper.text()).toContain('A passionate engineer and web developer')
   })
 
@@ -41,7 +44,7 @@ describe('AboutSection', () => {
     const imageElement = wrapper.find('img')
     expect(imageElement.exists()).toBe(true)
     expect(imageElement.attributes('src')).toBe('/images/Philipp-Gehrig_2025.png')
-    expect(imageElement.attributes('alt')).toBe('Profile Photo')
+    expect(imageElement.attributes('alt')).toBe('Philipp Gehrig')
   })
 
   it('renders social media links correctly', () => {
@@ -74,7 +77,7 @@ describe('AboutSection', () => {
     const wrapper = mount(AboutSection)
     
     expect(wrapper.find('.animate-pulse').exists()).toBe(true)
-    expect(wrapper.find('h3').exists()).toBe(false)
+    expect(wrapper.find('h1').exists()).toBe(false)
   })
 
   it('shows error state', async () => {
@@ -87,8 +90,8 @@ describe('AboutSection', () => {
 
     const wrapper = mount(AboutSection)
     
-    expect(wrapper.find('.text-red-500').exists()).toBe(true)
-    expect(wrapper.text()).toContain('Error loading profile data')
+    expect(wrapper.find('.text-red-400').exists()).toBe(true)
+    expect(wrapper.text()).toContain('Error loading profile. Please try again later.')
   })
 
   it('shows placeholder when no profile image', async () => {
@@ -134,10 +137,12 @@ describe('AboutSection', () => {
     // Verify the bio paragraph exists and contains the content
     const bioElement = wrapper.find('p')
     expect(bioElement.exists()).toBe(true)
-    expect(bioElement.classes()).toContain('text-lg')
+    // The component uses responsive classes: text-base md:text-lg
+    expect(bioElement.classes()).toContain('text-base')
+    expect(bioElement.classes()).toContain('md:text-lg')
     
-    // Check that the container has appropriate max-width class to prevent horizontal overflow
-    expect(wrapper.find('.max-w-3xl').exists()).toBe(true)
+    // Check that the bio paragraph has a max-width constraint to prevent overflow
+    expect(bioElement.classes()).toContain('max-w-xl')
   })
 
   it('handles long content with proper scrollbar behavior', async () => {
@@ -162,15 +167,15 @@ describe('AboutSection', () => {
     const bioElement = wrapper.find('p')
     expect(bioElement.exists()).toBe(true)
     
-    // Check that the container has proper classes for handling overflow
-    expect(wrapper.find('.max-w-3xl').exists()).toBe(true)
+    // Check that the bio paragraph has max-width and proper text styling
+    expect(bioElement.classes()).toContain('max-w-xl')
     
     // Check that long text is contained within a paragraph with proper styling
-    expect(bioElement.classes()).toContain('text-lg')
+    expect(bioElement.classes()).toContain('text-base')
     expect(bioElement.classes()).toContain('leading-relaxed')
     
-    // Verify container hierarchy for proper scroll handling
-    const container = wrapper.find('.container')
+    // Verify container hierarchy for proper layout
+    const container = wrapper.find('.max-w-6xl')
     expect(container.exists()).toBe(true)
     expect(container.classes()).toContain('mx-auto')
     expect(container.classes()).toContain('px-6')

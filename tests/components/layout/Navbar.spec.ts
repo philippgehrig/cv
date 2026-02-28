@@ -50,9 +50,12 @@ describe('Navbar', () => {
       }
     })
 
-    // Check navigation items exist
+    // Check navigation items exist - the component has anchor links: About, Experience, Education, Contact
     expect(wrapper.find('a[href="/"]').exists()).toBe(true)
-    expect(wrapper.text()).toContain('Home')
+    expect(wrapper.text()).toContain('About')
+    expect(wrapper.text()).toContain('Experience')
+    expect(wrapper.text()).toContain('Education')
+    expect(wrapper.text()).toContain('Contact')
   })
 
   it('toggles mobile menu when button is clicked', async () => {
@@ -67,36 +70,30 @@ describe('Navbar', () => {
       }
     })
 
-    // Initially the mobile menu should be closed (invisible)
-    expect(wrapper.find('.invisible').exists()).toBe(true)
-    expect(wrapper.find('.visible').exists()).toBe(false)
+    // Initially the mobile menu should be closed (v-if="mobileOpen" is false, so the dropdown is not rendered)
+    expect(wrapper.find('.md\\:hidden.bg-dark-800\\/95').exists()).toBe(false)
 
     // Click the mobile menu button
     await wrapper.find('button').trigger('click')
 
-    // Now the mobile menu should be open (visible)
-    expect(wrapper.find('.invisible').exists()).toBe(false)
-    expect(wrapper.find('.visible').exists()).toBe(true)
+    // Now the mobile menu should be open (v-if="mobileOpen" is true)
+    expect(wrapper.find('.md\\:hidden.bg-dark-800\\/95').exists()).toBe(true)
 
     // Click again to close
     await wrapper.find('button').trigger('click')
 
     // Menu should be closed again
-    expect(wrapper.find('.invisible').exists()).toBe(true)
-    expect(wrapper.find('.visible').exists()).toBe(false)
+    expect(wrapper.find('.md\\:hidden.bg-dark-800\\/95').exists()).toBe(false)
   })
 
   it('updates scroll state when scrolled', async () => {
     // We need to mock the scroll event handler directly
-    vi.spyOn(window, 'addEventListener').mockImplementation((event, handler) => {
-      if (event === 'scroll' as string) {
-        // Immediately invoke the handler to simulate scrolling
-        (handler as EventListener)(new Event('scroll'))
+    let scrollHandler: Function | null = null
+    vi.spyOn(window, 'addEventListener').mockImplementation((event: string, handler: any) => {
+      if (event === 'scroll') {
+        scrollHandler = handler
       }
     })
-    
-    // Reset scrollY for this test
-    Object.defineProperty(window, 'scrollY', { value: 20, configurable: true })
     
     const wrapper = mount(Navbar, {
       global: {
@@ -109,19 +106,26 @@ describe('Navbar', () => {
       }
     })
     
+    // Simulate scrolling past the threshold (scrolled = scrollY > 16)
+    Object.defineProperty(window, 'scrollY', { value: 20, configurable: true })
+    if (scrollHandler) {
+      scrollHandler()
+    }
+    
     // Wait for Vue to update the DOM
     await wrapper.vm.$nextTick()
-    await wrapper.vm.$nextTick() // Double nextTick for stability
     
-    // Now it should have the shadow class
-    expect(wrapper.find('.shadow-apple').exists()).toBe(true)
+    // When scrolled, the header gets these classes: bg-dark-900/90, backdrop-blur-xl, border-b, border-white/5
+    const header = wrapper.find('header')
+    expect(header.classes()).toContain('bg-dark-900/90')
+    expect(header.classes()).toContain('backdrop-blur-xl')
   })
 
   it('adds event listeners on mount and removes on unmount', () => {
     const wrapper = mount(Navbar)
     
-    // Check that addEventListener was called for scroll
-    expect(window.addEventListener).toHaveBeenCalledWith('scroll', expect.any(Function))
+    // Check that addEventListener was called for scroll with passive option
+    expect(window.addEventListener).toHaveBeenCalledWith('scroll', expect.any(Function), { passive: true })
     
     // Unmount the component
     wrapper.unmount()
