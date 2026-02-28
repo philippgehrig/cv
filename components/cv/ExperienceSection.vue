@@ -47,7 +47,8 @@
                 v-if="getCompanyLogo(job.company)"
                 :src="getCompanyLogo(job.company) || undefined"
                 :alt="`${job.company} logo`"
-                class="h-7 object-contain opacity-60 group-hover:opacity-90 transition-opacity logo-dark"
+                class="h-7 object-contain opacity-60 group-hover:opacity-90 transition-opacity"
+                :class="getLogoClass(job.company)"
               />
               <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-accent/10 border border-accent/20 text-xs font-mono text-accent whitespace-nowrap">
                 {{ job.period }}
@@ -150,9 +151,17 @@ const isRoleOpen = (jobId: number, roleIndex: number) => {
 function getCompanyLogo(company: string): string | null {
   const c = company.toLowerCase();
   if (c.includes('mercedes') || c.includes('benz')) return '/images/logos/mercedes-benz.png';
-  if (c.includes('dhbw') && c.includes('engineering')) return '/images/logos/dhbw-engineering.png';
+  if (c.includes('dhbw') && c.includes('engineering')) return '/images/logos/dhbw-engineering.svg';
   if (c.includes('dhbw')) return '/images/logos/dhbw.png';
   return null;
+}
+
+function getLogoClass(company: string): string {
+  const c = company.toLowerCase();
+  // The DHBW Engineering logo has white text + red lines on a transparent bg;
+  // it renders directly on dark cards without blend-mode tricks.
+  if (c.includes('dhbw') && c.includes('engineering')) return 'logo-transparent';
+  return 'logo-dark';
 }
 </script>
 
@@ -162,5 +171,11 @@ function getCompanyLogo(company: string): string | null {
 .logo-dark {
   mix-blend-mode: screen;
   filter: brightness(0.9) contrast(1.1);
+}
+
+/* Logos that already have a transparent background with light-coloured elements.
+   No blend-mode needed — just display directly on the dark card. */
+.logo-transparent {
+  mix-blend-mode: normal;
 }
 </style>
