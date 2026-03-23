@@ -74,7 +74,10 @@ import { useRoute } from 'vue-router';
 /** Minimum scroll distance (px) before the header background is applied. */
 const SCROLL_THRESHOLD = 16;
 
-/** Height of the fixed navbar (px) used to offset active-section detection. */
+/**
+ * Offset (px) added to `window.scrollY` when detecting the active section.
+ * Slightly larger than the visual navbar height (~64px) so sections switch a bit earlier.
+ */
 const NAVBAR_HEIGHT_OFFSET = 80;
 
 const route = useRoute();
