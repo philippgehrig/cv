@@ -47,8 +47,9 @@ export default defineNuxtPlugin(() => {
        *
        * Side effects:
        * - Removes `line-numbers` classes that interfere with Prism's rendering.
-       * - Adds `data-language` attributes to `<pre>` elements so the toolbar
-       *   plugin can display the language label.
+       * - Adds `data-language` attributes to `<pre>` elements so that other
+       *   Prism plugins, themes, or custom code can optionally display the
+       *   associated language.
        */
       highlightCode: () => {
         window.setTimeout(() => {
