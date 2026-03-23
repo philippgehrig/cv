@@ -71,13 +71,21 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 
+/** Minimum scroll distance (px) before the header background is applied. */
+const SCROLL_THRESHOLD = 16;
+
+/** Height of the fixed navbar (px) used to offset active-section detection. */
+const NAVBAR_HEIGHT_OFFSET = 80;
+
 const route = useRoute();
 const mobileOpen = ref(false);
 const scrolled = ref(false);
 const activeSection = ref('about');
 
+/** True when the visitor is on the home page and section anchors should be shown. */
 const isHomePage = computed(() => route.path === '/');
 
+/** Navigation items that link to on-page section anchors. */
 const anchorItems = [
   { id: 'about',      label: 'About',      href: '#about' },
   { id: 'experience', label: 'Experience', href: '#experience' },
@@ -85,6 +93,10 @@ const anchorItems = [
   { id: 'contact',    label: 'Contact',    href: '#contact' },
 ];
 
+/**
+ * Smoothly scrolls the viewport to the section with the given `id`.
+ * @param id - The `id` attribute of the target section element.
+ */
 const scrollToSection = (id: string) => {
   const el = document.getElementById(id);
   if (el) {
@@ -92,12 +104,18 @@ const scrollToSection = (id: string) => {
   }
 };
 
+/**
+ * Scroll event handler that:
+ * 1. Toggles the `scrolled` flag once the page passes `SCROLL_THRESHOLD` pixels.
+ * 2. Determines which section is currently in view by comparing the adjusted
+ *    scroll position against each section's `offsetTop`, iterating in reverse
+ *    so the last match wins (i.e. the topmost visible section).
+ */
 const handleScroll = () => {
-  scrolled.value = window.scrollY > 16;
+  scrolled.value = window.scrollY > SCROLL_THRESHOLD;
 
-  // Update active section based on scroll position
   const sections = anchorItems.map(item => document.getElementById(item.id));
-  const scrollY = window.scrollY + 80; // offset for navbar height
+  const scrollY = window.scrollY + NAVBAR_HEIGHT_OFFSET;
 
   for (let i = sections.length - 1; i >= 0; i--) {
     const section = sections[i];
@@ -110,6 +128,7 @@ const handleScroll = () => {
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll, { passive: true });
+  // Run once on mount to set initial state without waiting for a scroll event.
   handleScroll();
 });
 onUnmounted(() => window.removeEventListener('scroll', handleScroll));

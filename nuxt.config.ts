@@ -17,10 +17,4 @@ export default defineNuxtConfig({
       ]
     }
   },
-  runtimeConfig: {},
-  vite: {
-    optimizeDeps: {
-      include: []
-    }
-  },
 })
