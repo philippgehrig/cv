@@ -54,7 +54,7 @@ describe('ExperienceSection', () => {
     const wrapper = mount(ExperienceSection)
     // Each experience is wrapped in a div with rounded-xl
     const cards = wrapper.findAll('.rounded-xl')
-    expect(cards.length).toBeGreaterThanOrEqual(2)
+    expect(cards).toHaveLength(2)
   })
 
   it('shows company name for the first experience', () => {
