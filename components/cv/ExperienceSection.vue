@@ -132,9 +132,18 @@ import { useExperiences } from '~/composables/useExperiences';
 
 const { experiences, isLoading, error } = useExperiences();
 
-// Track which role rows are expanded: Map key = `${jobId}-${roleIndex}`
+/**
+ * Tracks which role rows are currently expanded.
+ * Keys follow the pattern `"${jobId}-${roleIndex}"` so that each role within
+ * each company can be toggled independently.
+ */
 const openRoles = ref(new Set<string>());
 
+/**
+ * Toggles the expanded state of a role row.
+ * @param jobId - The `id` of the parent `Experience` entry.
+ * @param roleIndex - The zero-based index of the role within `Experience.roles`.
+ */
 const toggleRole = (jobId: number, roleIndex: number) => {
   const key = `${jobId}-${roleIndex}`;
   if (openRoles.value.has(key)) {
@@ -144,10 +153,23 @@ const toggleRole = (jobId: number, roleIndex: number) => {
   }
 };
 
+/**
+ * Returns `true` if the given role row is currently expanded.
+ * @param jobId - The `id` of the parent `Experience` entry.
+ * @param roleIndex - The zero-based index of the role within `Experience.roles`.
+ */
 const isRoleOpen = (jobId: number, roleIndex: number) => {
   return openRoles.value.has(`${jobId}-${roleIndex}`);
 };
 
+/**
+ * Maps a company name to its logo file path.
+ * Matching is case-insensitive and based on key substrings so that minor
+ * name variations (e.g. "Mercedes-Benz" vs "Mercedes Benz") still resolve.
+ *
+ * @param company - The company name from the experience data.
+ * @returns The logo path, or `null` if no logo is available for this company.
+ */
 function getCompanyLogo(company: string): string | null {
   const c = company.toLowerCase();
   if (c.includes('mercedes') || c.includes('benz')) return '/images/logos/mercedes-benz.png';
@@ -156,25 +178,38 @@ function getCompanyLogo(company: string): string | null {
   return null;
 }
 
+/**
+ * Returns the CSS class controlling how a company logo blends with the dark
+ * card background.
+ *
+ * - `logo-dark`: logos with a white/light solid background — rendered using
+ *   `mix-blend-mode: screen` so the background appears transparent.
+ * - `logo-transparent`: logos that already use a transparent background with
+ *   light-coloured elements — rendered without any blend-mode adjustment.
+ *
+ * @param company - The company name from the experience data.
+ */
 function getLogoClass(company: string): string {
   const c = company.toLowerCase();
-  // The DHBW Engineering logo has white text + red lines on a transparent bg;
-  // it renders directly on dark cards without blend-mode tricks.
   if (c.includes('dhbw') && c.includes('engineering')) return 'logo-transparent';
   return 'logo-dark';
 }
 </script>
 
 <style scoped>
-/* Make logos with white/light backgrounds blend into the dark card.
-   mix-blend-mode: screen treats white as transparent and preserves colours. */
+/**
+ * Logos with a white/light solid background: mix-blend-mode "screen" makes
+ * white appear transparent so the logo colours show through on the dark card.
+ */
 .logo-dark {
   mix-blend-mode: screen;
   filter: brightness(0.9) contrast(1.1);
 }
 
-/* Logos that already have a transparent background with light-coloured elements.
-   No blend-mode needed — just display directly on the dark card. */
+/**
+ * Logos that already have a transparent background with light-coloured
+ * elements: render directly on the dark card without any blend-mode.
+ */
 .logo-transparent {
   mix-blend-mode: normal;
 }

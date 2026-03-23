@@ -1,9 +1,20 @@
+/**
+ * Nuxt client-side plugin that sets up PrismJS syntax highlighting.
+ *
+ * This plugin:
+ *  1. Imports the core Prism stylesheet and all supported language grammars.
+ *  2. Registers the Toolbar and Copy-to-Clipboard Prism plugins.
+ *  3. Maps `.vue` files to HTML/markup highlighting (closest built-in grammar).
+ *  4. Exposes a `$highlightCode()` helper that components can call after
+ *     dynamic content is inserted into the DOM — it runs in the next event-loop
+ *     tick to ensure the DOM is fully settled before highlighting.
+ */
 import Prism from 'prismjs';
 
-// Import Prism core styles
+// Core theme
 import 'prismjs/themes/prism.css';
 
-// Import additional languages
+// Language grammars
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-css';
@@ -17,26 +28,37 @@ import 'prismjs/components/prism-jsx';     // JSX
 import 'prismjs/components/prism-tsx';     // TSX
 import 'prismjs/components/prism-php';     // PHP
 
-// Import toolbar plugin
+// UI plugins
 import 'prismjs/plugins/toolbar/prism-toolbar.css';
 import 'prismjs/plugins/toolbar/prism-toolbar.js';
 import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.js';
 
 export default defineNuxtPlugin(() => {
-  // Use HTML highlighting for Vue files
+  // Treat .vue files as HTML markup — the closest built-in Prism grammar.
   Prism.languages.vue = Prism.languages.markup;
   
   return {
     provide: {
+      /**
+       * Triggers Prism syntax highlighting on all code blocks in the document.
+       *
+       * Runs after a zero-millisecond `setTimeout` so that any pending DOM
+       * mutations (e.g. from `v-html`) are committed before highlighting runs.
+       *
+       * Side effects:
+       * - Removes `line-numbers` classes that interfere with Prism's rendering.
+       * - Adds `data-language` attributes to `<pre>` elements so that other
+       *   Prism plugins, themes, or custom code can optionally display the
+       *   associated language.
+       */
       highlightCode: () => {
-        // Need to run this in the next tick after DOM is updated
         window.setTimeout(() => {
-          // Remove line-numbers class from all pre elements
+          // Remove line-numbers class to avoid rendering artefacts.
           document.querySelectorAll('pre.line-numbers').forEach(block => {
             block.classList.remove('line-numbers');
           });
           
-          // Set data-language attribute for labeling code blocks
+          // Expose the detected language as a data attribute for labelling.
           document.querySelectorAll('pre[class*="language-"]').forEach(pre => {
             const language = Array.from(pre.classList)
               .find(className => className.startsWith('language-'))
@@ -46,7 +68,6 @@ export default defineNuxtPlugin(() => {
             }
           });
           
-          // Explicitly run syntax highlighting
           Prism.highlightAll();
         }, 0);
       }
