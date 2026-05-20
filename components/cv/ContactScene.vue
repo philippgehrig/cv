@@ -30,7 +30,6 @@
         <div class="space-y-4">
           <a
             href="mailto:philipp@gehrig.info"
-            ref="emailRef"
             class="contact-link flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-dark-800/60 hover:border-accent/30 hover:bg-dark-800 transition-all duration-200 group opacity-0"
             @mouseenter="pulseRing($event)"
           >
@@ -49,7 +48,6 @@
             href="https://linkedin.com/in/philippgehrig"
             target="_blank"
             rel="noopener noreferrer"
-            ref="linkedinRef"
             class="contact-link flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-dark-800/60 hover:border-accent/30 hover:bg-dark-800 transition-all duration-200 group opacity-0"
             @mouseenter="pulseRing($event)"
           >
@@ -68,7 +66,6 @@
             href="https://github.com/philippgehrig"
             target="_blank"
             rel="noopener noreferrer"
-            ref="githubRef"
             class="contact-link flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-dark-800/60 hover:border-accent/30 hover:bg-dark-800 transition-all duration-200 group opacity-0"
             @mouseenter="pulseRing($event)"
           >
@@ -89,7 +86,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue';
+import { ref, onMounted, onUnmounted, nextTick } from 'vue';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -99,62 +96,71 @@ const eyebrowLineRef = ref<HTMLElement>();
 const eyebrowTextRef = ref<HTMLElement>();
 const titleTextRef = ref<HTMLElement>();
 const descRef = ref<HTMLElement>();
-const emailRef = ref<HTMLElement>();
-const linkedinRef = ref<HTMLElement>();
-const githubRef = ref<HTMLElement>();
 const radarContainerRef = ref<HTMLElement>();
+
+let gsapCtx: gsap.Context | null = null;
+let ambientStarted = false;
 
 onMounted(async () => {
   await nextTick();
   gsap.registerPlugin(ScrollTrigger);
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
+  gsapCtx = gsap.context(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.value,
+        start: 'top 75%',
+        toggleActions: 'play none none none',
+      },
+    });
+
+    // Header
+    tl.to(eyebrowLineRef.value, { width: 24, duration: 0.2 }, 0);
+    tl.to(eyebrowTextRef.value, { opacity: 1, duration: 0.2 }, 0.05);
+    tl.fromTo(titleTextRef.value, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 }, 0.1);
+    tl.fromTo(descRef.value, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3 }, 0.2);
+
+    // Radar rings pulse
+    const rings = radarContainerRef.value?.querySelectorAll('.radar-ring');
+    if (rings) {
+      rings.forEach((ring, i) => {
+        tl.fromTo(ring,
+          { borderColor: 'rgba(99,102,241,0)', scale: 0.8 },
+          { borderColor: 'rgba(99,102,241,0.15)', scale: 1, duration: 0.3, ease: 'power2.out' },
+          0.25 + i * 0.08
+        );
+      });
+    }
+
+    // Contact links stagger
+    const contactLinks = sectionRef.value?.querySelectorAll('.contact-link');
+    if (contactLinks) {
+      contactLinks.forEach((link, i) => {
+        tl.fromTo(link,
+          { opacity: 0, y: 20, filter: 'blur(4px)' },
+          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.25, ease: 'power2.out' },
+          0.4 + i * 0.12
+        );
+      });
+    }
+
+    // Ambient radar pulse loop (fires once)
+    ScrollTrigger.create({
       trigger: sectionRef.value,
-      start: 'top 75%',
-      toggleActions: 'play none none none',
-    },
-  });
-
-  // Header
-  tl.to(eyebrowLineRef.value, { width: 24, duration: 0.2 }, 0);
-  tl.to(eyebrowTextRef.value, { opacity: 1, duration: 0.2 }, 0.05);
-  tl.fromTo(titleTextRef.value, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 }, 0.1);
-  tl.fromTo(descRef.value, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3 }, 0.2);
-
-  // Radar rings pulse
-  const rings = radarContainerRef.value?.querySelectorAll('.radar-ring');
-  if (rings) {
-    rings.forEach((ring, i) => {
-      tl.fromTo(ring,
-        { borderColor: 'rgba(99,102,241,0)', scale: 0.8 },
-        { borderColor: 'rgba(99,102,241,0.15)', scale: 1, duration: 0.3, ease: 'power2.out' },
-        0.25 + i * 0.08
-      );
+      start: 'top 20%',
+      once: true,
+      onEnter: () => startAmbientPulse(),
     });
-  }
+  }, sectionRef.value);
+});
 
-  // Contact links stagger
-  const contactLinks = sectionRef.value?.querySelectorAll('.contact-link');
-  if (contactLinks) {
-    contactLinks.forEach((link, i) => {
-      tl.fromTo(link,
-        { opacity: 0, y: 20, filter: 'blur(4px)' },
-        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.25, ease: 'power2.out' },
-        0.4 + i * 0.12
-      );
-    });
-  }
-
-  // Ambient radar pulse loop (after scroll animation)
-  ScrollTrigger.create({
-    trigger: sectionRef.value,
-    start: 'top 20%',
-    onEnter: () => startAmbientPulse(),
-  });
+onUnmounted(() => {
+  gsapCtx?.revert();
 });
 
 function startAmbientPulse() {
+  if (ambientStarted) return;
+  ambientStarted = true;
   const rings = radarContainerRef.value?.querySelectorAll('.radar-ring');
   if (!rings) return;
   rings.forEach((ring, i) => {

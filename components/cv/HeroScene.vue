@@ -103,12 +103,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick, watch } from 'vue';
+import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue';
 import { useProfile } from '~/composables/useProfile';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const { profile } = useProfile();
+let gsapCtx: gsap.Context | null = null;
 
 const sectionRef = ref<HTMLElement>();
 const eyebrowRef = ref<HTMLElement>();
@@ -144,6 +145,8 @@ function initAnimations() {
   if (!sectionRef.value) return;
 
   gsap.registerPlugin(ScrollTrigger);
+
+  gsapCtx = gsap.context(() => {
 
   // Time-based intro animation — structured beats:
   // Name → pause → Role → pause → Face → Story → Links
@@ -207,5 +210,11 @@ function initAnimations() {
       scrub: 0.5,
     },
   });
+
+  }, sectionRef.value);
 }
+
+onUnmounted(() => {
+  gsapCtx?.revert();
+});
 </script>

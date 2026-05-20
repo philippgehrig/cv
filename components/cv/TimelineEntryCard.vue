@@ -14,7 +14,7 @@
     <div
       class="entry-card ml-4 rounded-xl border bg-dark-800/60 backdrop-blur-sm p-5 md:p-6 transition-all duration-300 cursor-pointer"
       :class="[
-        expanded ? 'border-white/15 bg-dark-800' : 'border-white/5 hover:border-white/10 hover:bg-dark-800',
+        expanded ? 'border-white/20 bg-dark-800' : 'border-white/5 hover:border-white/10 hover:bg-dark-800',
       ]"
       @click="toggle"
     >
@@ -51,13 +51,13 @@
         <span
           v-for="(tech, i) in entry.technologies"
           :key="i"
-          class="tag-item px-2 py-0.5 rounded bg-white/5 border border-white/8 text-[11px] text-zinc-400"
+          class="tag-item px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[11px] text-zinc-400"
         >{{ tech }}</span>
       </div>
 
       <!-- Expandable content -->
       <Transition
-        enter-active-class="transition-all duration-400 ease-out overflow-hidden"
+        enter-active-class="transition-all duration-[400ms] ease-out overflow-hidden"
         enter-from-class="opacity-0 max-h-0"
         enter-to-class="opacity-100 max-h-[600px]"
         leave-active-class="transition-all duration-300 ease-in overflow-hidden"
@@ -94,7 +94,7 @@
             <span
               v-for="(tech, i) in entry.expandedContent.technologies"
               :key="i"
-              class="px-2 py-0.5 rounded bg-white/5 border border-white/8 text-[11px] text-zinc-400"
+              class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[11px] text-zinc-400"
             >{{ tech }}</span>
           </div>
         </div>
@@ -150,7 +150,7 @@ const badgeClass = computed(() => {
 const courseCardClass = computed(() => {
   switch (props.entry.type) {
     case 'education': return 'bg-teal/5 border-teal/10';
-    default: return 'bg-white/3 border-white/8';
+    default: return 'bg-white/[0.03] border-white/10';
   }
 });
 

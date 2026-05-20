@@ -18,7 +18,7 @@
           v-for="filter in filters"
           :key="filter.type"
           class="flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-medium transition-all duration-300"
-          :class="isFilterActive(filter.type) ? filter.activeClass : 'border-white/8 bg-white/3 text-zinc-500 hover:bg-white/5'"
+          :class="isFilterActive(filter.type) ? filter.activeClass : 'border-white/[0.08] bg-white/[0.03] text-zinc-500 hover:bg-white/5'"
           @click="toggleFilter(filter.type)"
         >
           <span class="w-2 h-2 rounded-full" :class="filter.dotClass"></span>
@@ -73,12 +73,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick, watch } from 'vue';
+import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue';
 import { useTimeline } from '~/composables/useTimeline';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import TimelineYearMarker from './TimelineYearMarker.vue';
 import TimelineEntryCard from './TimelineEntryCard.vue';
+
+let gsapCtx: gsap.Context | null = null;
 
 const { filteredItems, toggleFilter, isFilterActive } = useTimeline();
 
@@ -104,35 +106,41 @@ onMounted(async () => {
 
   updateTimelineHeight();
 
-  // Header animation
-  const headerTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: headerRef.value,
-      start: 'top 80%',
-      end: 'top 50%',
-      scrub: 0.5,
-    },
-  });
+  gsapCtx = gsap.context(() => {
+    // Header animation
+    const headerTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: headerRef.value,
+        start: 'top 80%',
+        end: 'top 50%',
+        scrub: 0.5,
+      },
+    });
 
-  headerTl.to(eyebrowLineRef.value, { width: 24, duration: 0.3 }, 0);
-  headerTl.to(eyebrowTextRef.value, { opacity: 1, duration: 0.3 }, 0.1);
-  headerTl.fromTo(titleTextRef.value, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 }, 0.15);
-  headerTl.to(filtersRef.value, { opacity: 1, duration: 0.3 }, 0.25);
+    headerTl.to(eyebrowLineRef.value, { width: 24, duration: 0.3 }, 0);
+    headerTl.to(eyebrowTextRef.value, { opacity: 1, duration: 0.3 }, 0.1);
+    headerTl.fromTo(titleTextRef.value, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 }, 0.15);
+    headerTl.to(filtersRef.value, { opacity: 1, duration: 0.3 }, 0.25);
 
-  // Timeline line draw
-  gsap.to(timelineLineRef.value, {
-    strokeDashoffset: 0,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: timelineRef.value,
-      start: 'top 70%',
-      end: 'bottom 30%',
-      scrub: 0.3,
-    },
-  });
+    // Timeline line draw
+    gsap.to(timelineLineRef.value, {
+      strokeDashoffset: 0,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: timelineRef.value,
+        start: 'top 70%',
+        end: 'bottom 30%',
+        scrub: 0.3,
+      },
+    });
 
-  // Animate entry cards
-  animateEntries();
+    // Animate entry cards
+    animateEntries();
+  }, sectionRef.value);
+});
+
+onUnmounted(() => {
+  gsapCtx?.revert();
 });
 
 function updateTimelineHeight() {
