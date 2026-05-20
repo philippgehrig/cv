@@ -91,8 +91,7 @@ const isHomePage = computed(() => route.path === '/');
 /** Navigation items that link to on-page section anchors. */
 const anchorItems = [
   { id: 'about',      label: 'About',      href: '#about' },
-  { id: 'experience', label: 'Experience', href: '#experience' },
-  { id: 'education',  label: 'Education',  href: '#education' },
+  { id: 'experience', label: 'Experience & Education', href: '#experience' },
   { id: 'contact',    label: 'Contact',    href: '#contact' },
 ];
 
