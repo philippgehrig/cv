@@ -1,0 +1,221 @@
+import type { TimelineEntry, YearMarker, TimelineItem } from './types';
+
+const entries: TimelineEntry[] = [
+  {
+    id: 'mb-tpo',
+    type: 'work',
+    title: 'System Architect & Technical Product Owner',
+    subtitle: 'Mercedes-Benz Group AG',
+    period: 'Mar 2026 – Present',
+    startDate: '2026-03',
+    description: 'Leading a team of 5 developers and 3 working students to build an orchestration platform on top of Camunda 8. Designed a higher-level abstraction layer providing reusable building blocks for BTVs to model software approval workflows. Defined process standards aligned with VDA2 requirements.',
+    technologies: ['Camunda 8', 'System Architecture', 'Technical Leadership', 'Product Management', 'VDA2', 'Process Orchestration'],
+  },
+  {
+    id: 'master-exec',
+    type: 'education',
+    title: 'Master Executive Engineering',
+    subtitle: 'DHBW CAS – Center for Advanced Studies',
+    period: 'Oct 2026 (upcoming)',
+    startDate: '2026-10',
+    description: 'Work-integrated Master programme focusing on interpersonal leadership competencies and advanced technical electives.',
+    technologies: ['Leadership', 'Engineering Management', 'Work-Integrated'],
+  },
+  {
+    id: 'mb-architect',
+    type: 'work',
+    title: 'System Architect',
+    subtitle: 'Mercedes-Benz Group AG',
+    period: 'Oct 2025 – Feb 2026',
+    startDate: '2025-10',
+    endDate: '2026-02',
+    description: 'Conceptualised and designed the architecture for a new orchestration platform built on Camunda 8. Defined technical standards based on VDA2 and developed initial prototypes.',
+    technologies: ['System Architecture', 'Camunda 8', 'VDA2', 'Prototyping', 'Process Modeling'],
+  },
+  {
+    id: 'dhbw-eng-alumni',
+    type: 'extracurricular',
+    title: 'Alumni Supervisor',
+    subtitle: 'DHBW Engineering e.V. — Formula Student',
+    period: 'Sep 2025 – Present',
+    startDate: '2025-09',
+    description: 'Supervising a Computer Science student writing a research paper on the continuation and advancement of the CFD simulation toolchain.',
+    technologies: ['CFD', 'Research Supervision', 'Academic Mentoring'],
+  },
+  {
+    id: 'thesis',
+    type: 'work',
+    title: "Bachelor's Thesis (Grade: 1.3)",
+    subtitle: 'Mercedes-Benz — Corporate Student',
+    period: 'Jun – Sep 2025',
+    startDate: '2025-06',
+    endDate: '2025-09',
+    description: 'PCIe-Based Communication Concept in the Transformation to a Zonal Vehicle Architecture. Focused on driver development for PCIe communication between Nvidia Jetson Orin platforms.',
+    technologies: ['PCIe', 'Nvidia Jetson', 'Linux Driver Development', 'Zonal E/E Architecture'],
+  },
+  {
+    id: 'uni-sem6',
+    type: 'education',
+    title: 'Uni Semester 6',
+    subtitle: 'DHBW Stuttgart',
+    period: 'Mar – May 2025',
+    startDate: '2025-03',
+    endDate: '2025-05',
+    description: 'Advanced specialisation modules in automotive systems and engineering.',
+  },
+  {
+    id: 'mb-jetson',
+    type: 'work',
+    title: 'Nvidia Jetson — Automated Flashing',
+    subtitle: 'Mercedes-Benz — Corporate Student',
+    period: 'Dec 2024 – Feb 2025',
+    startDate: '2024-12',
+    endDate: '2025-02',
+    description: 'Automated flashing of Nvidia Jetson Orin modules for zonal vehicle architecture research. Developed tooling and infrastructure for reproducible embedded deployments.',
+    technologies: ['Nvidia Jetson', 'Linux', 'Embedded Systems', 'Automation', 'Zonal E/E'],
+  },
+  {
+    id: 'uni-sem5',
+    type: 'education',
+    title: 'Uni Semester 5',
+    subtitle: 'DHBW Stuttgart',
+    period: 'Sep – Nov 2024',
+    startDate: '2024-09',
+    endDate: '2024-11',
+    description: 'Continued specialisation with IT-Security, research methodology, and graphical programming.',
+  },
+  {
+    id: 'dhbw-eng-cfd',
+    type: 'extracurricular',
+    title: 'Lead CFD Engineer',
+    subtitle: 'DHBW Engineering e.V. — Formula Student',
+    period: 'Sep 2024 – Sep 2025',
+    startDate: '2024-09',
+    endDate: '2025-09',
+    description: 'Led a team of 4 engineers running Computational Fluid Dynamics simulations for the aerodynamics of the Formula Student car. Responsible for project planning, task delegation, and technical implementation.',
+    technologies: ['StarCCM+', 'CFD', 'Team Leadership', 'Project Management', 'Laravel'],
+  },
+  {
+    id: 'mb-grafana',
+    type: 'work',
+    title: 'Scrum Efficiency Dashboard — TargetLink / Ambient Lighting',
+    subtitle: 'Mercedes-Benz — Corporate Student (RD/KBX)',
+    period: 'Jun – Aug 2024',
+    startDate: '2024-06',
+    endDate: '2024-08',
+    description: 'Built a Grafana dashboard to improve efficiency of Scrum development teams working on TargetLink Development for Ambient Lighting systems.',
+    technologies: ['Grafana', 'Data Analysis', 'Web Development', 'Scrum', 'TargetLink'],
+  },
+  {
+    id: 'uni-sem4',
+    type: 'education',
+    title: 'Uni Semester 4',
+    subtitle: 'DHBW Stuttgart',
+    period: 'Mar – May 2024',
+    startDate: '2024-03',
+    endDate: '2024-05',
+    description: 'Core computer science and software engineering modules.',
+  },
+  {
+    id: 'dhbw-eng-vd',
+    type: 'extracurricular',
+    title: 'Vehicle Dynamics Software Engineer',
+    subtitle: 'DHBW Engineering e.V. — Formula Student',
+    period: 'Feb – Sep 2024',
+    startDate: '2024-02',
+    endDate: '2024-09',
+    description: 'Built a near-real-time vehicle telemetry monitoring tool using Grafana and InfluxDB with ~10-second data latency, enabling performance analysis during testing sessions.',
+    technologies: ['Grafana', 'InfluxDB', 'Docker', 'Linux', 'Matlab/Simulink', 'Vehicle Dynamics'],
+  },
+  {
+    id: 'mb-edrive',
+    type: 'work',
+    title: 'eDrive Test Bench — CAN Data Monitoring',
+    subtitle: 'Mercedes-Benz — Corporate Student (RD/EPT)',
+    period: 'Dec 2023 – Feb 2024',
+    startDate: '2023-12',
+    endDate: '2024-02',
+    description: 'Built a CAN data translation unit on ESP32 and Raspberry Pi that reads and interprets CAN bus data, displayed on a monitoring dashboard in the test bench hall entry.',
+    technologies: ['C', 'ESP32', 'Raspberry Pi', 'CAN Bus', 'Data Visualisation', 'eDrive'],
+  },
+  {
+    id: 'uni-sem3',
+    type: 'education',
+    title: 'Uni Semester 3',
+    subtitle: 'DHBW Stuttgart',
+    period: 'Sep – Nov 2023',
+    startDate: '2023-09',
+    endDate: '2023-11',
+    description: 'Databases, software engineering, networking, and computer engineering.',
+  },
+  {
+    id: 'mb-group-project',
+    type: 'work',
+    title: 'Group Project (Training)',
+    subtitle: 'Mercedes-Benz — Corporate Student',
+    period: 'Aug 2023',
+    startDate: '2023-08',
+    endDate: '2023-08',
+    description: 'Cross-functional group project as part of the corporate student training programme.',
+  },
+  {
+    id: 'uni-sem2',
+    type: 'education',
+    title: 'Uni Semester 2',
+    subtitle: 'DHBW Stuttgart',
+    period: 'Apr – Jul 2023',
+    startDate: '2023-04',
+    endDate: '2023-07',
+    description: 'Continued foundation modules in computer science and mathematics.',
+  },
+  {
+    id: 'mb-training',
+    type: 'work',
+    title: 'Training',
+    subtitle: 'Mercedes-Benz — Corporate Student',
+    period: 'Mar 2023',
+    startDate: '2023-03',
+    endDate: '2023-03',
+    description: 'Technical training programme covering automotive software development fundamentals.',
+  },
+  {
+    id: 'uni-sem1',
+    type: 'education',
+    title: 'Uni Semester 1',
+    subtitle: 'DHBW Stuttgart',
+    period: 'Dec 2022 – Feb 2023',
+    startDate: '2022-12',
+    endDate: '2023-02',
+    description: 'Foundation modules: mathematics, theoretical computer science, and programming.',
+  },
+  {
+    id: 'mb-onboarding',
+    type: 'work',
+    title: 'Onboarding',
+    subtitle: 'Mercedes-Benz — Corporate Student',
+    period: 'Oct – Nov 2022',
+    startDate: '2022-10',
+    endDate: '2022-11',
+    description: 'Initial onboarding and introduction to Mercedes-Benz corporate student programme.',
+  },
+];
+
+function buildTimeline(): TimelineItem[] {
+  const sorted = [...entries].sort((a, b) => b.startDate.localeCompare(a.startDate));
+
+  const items: TimelineItem[] = [];
+  let currentYear: number | null = null;
+
+  for (const entry of sorted) {
+    const year = parseInt(entry.startDate.substring(0, 4));
+    if (year !== currentYear) {
+      currentYear = year;
+      items.push({ id: `year-${year}`, isYearMarker: true, year });
+    }
+    items.push({ ...entry, isYearMarker: false });
+  }
+
+  return items;
+}
+
+export const timelineData: TimelineItem[] = buildTimeline();

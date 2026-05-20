@@ -1,17 +1,15 @@
 <template>
   <div>
-    <AboutSection />
-    <ExperienceSection />
-    <EducationSection />
-    <ContactSection />
+    <HeroScene />
+    <TimelineScene />
+    <ContactScene />
   </div>
 </template>
 
 <script setup lang="ts">
-import AboutSection from '~/components/cv/AboutSection.vue';
-import ExperienceSection from '~/components/cv/ExperienceSection.vue';
-import EducationSection from '~/components/cv/EducationSection.vue';
-import ContactSection from '~/components/cv/ContactSection.vue';
+import HeroScene from '~/components/cv/HeroScene.vue';
+import TimelineScene from '~/components/cv/TimelineScene.vue';
+import ContactScene from '~/components/cv/ContactScene.vue';
 
 definePageMeta({
   title: 'Philipp Gehrig - Software Engineer',

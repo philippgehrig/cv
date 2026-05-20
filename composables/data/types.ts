@@ -72,6 +72,45 @@ export interface Education {
   sort?: number;
 }
 
+/** A course taken during a university semester. */
+export interface Course {
+  name: string;
+  grade: number;
+  ects: number;
+}
+
+/** Expanded content shown when a timeline entry is clicked open. */
+export interface ExpandedContent {
+  description?: string;
+  courses?: Course[];
+  technologies?: string[];
+}
+
+/** A single entry in the unified timeline. */
+export interface TimelineEntry {
+  id: string;
+  type: 'work' | 'education' | 'extracurricular';
+  title: string;
+  subtitle: string;
+  period: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies?: string[];
+  expandedContent?: ExpandedContent;
+  isYearMarker?: false;
+}
+
+/** A year divider in the timeline. */
+export interface YearMarker {
+  id: string;
+  isYearMarker: true;
+  year: number;
+}
+
+/** Union type for all items that can appear in the timeline. */
+export type TimelineItem = TimelineEntry | YearMarker;
+
 /** A grouping of related skills (reserved for future use). */
 export interface SkillCategory {
   /** Unique identifier for the skill category. */
