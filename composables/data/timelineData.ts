@@ -12,14 +12,14 @@ const entries: TimelineEntry[] = [
     technologies: ['Camunda 8', 'System Architecture', 'Technical Leadership', 'Product Management', 'VDA2', 'Process Orchestration'],
   },
   {
-    id: 'master-exec',
+    id: 'master-cs',
     type: 'education',
-    title: 'Master Executive Engineering',
+    title: 'Master of Science in Computer Science',
     subtitle: 'DHBW CAS – Center for Advanced Studies',
     period: 'Oct 2026 (upcoming)',
     startDate: '2026-10',
-    description: 'Work-integrated Master programme focusing on interpersonal leadership competencies and advanced technical electives.',
-    technologies: ['Leadership', 'Engineering Management', 'Work-Integrated'],
+    description: 'Work-integrated Master programme combining advanced computer science with leadership development, strengthening both technical depth and the ability to drive engineering teams.',
+    technologies: ['Computer Science', 'Technical Leadership', 'Work-Integrated'],
   },
   {
     id: 'mb-architect',
