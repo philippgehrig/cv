@@ -10,6 +10,8 @@ export interface Profile {
   title: string;
   /** Short biographical text shown below the title. */
   bio: string;
+  /** Public contact email address. */
+  email?: string;
   /** Optional path or URL to a profile photo. */
   profile_image?: string;
   /** Optional full LinkedIn profile URL. */

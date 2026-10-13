@@ -1,0 +1,73 @@
+:root {
+  color-scheme: light;
+  --color-paper: #f0ede7;
+  --color-ink: #302a28;
+  --color-muted: #71655b;
+  --color-line: #cfc6ba;
+  --color-surface: #fbf9f5;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--color-paper); color: var(--color-ink); }
+p { line-height: 1.65; }
+a { color: inherit; text-decoration: none; }
+::selection { background: #e7cfbb; color: #302a28; }
+
+:where(a, button, summary):focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 5px;
+}
+
+[id] { scroll-margin-top: 1.5rem; }
+
+.site-wrap {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-inline: 52px;
+}
+
+.eyebrow {
+  font: 0.6875rem/1.5 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--color-muted);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.75rem;
+  min-height: 48px;
+  padding: 0.875rem 1.1875rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus { transform: translateY(0); }
+.policy-page { padding-block: 3rem 4rem; }
+.policy-page h1 { font-weight: 500; }
+.policy-page a { text-underline-offset: 0.25em; }
+.policy-page a:hover { text-decoration: underline; }
+
+@media (max-width: 650px) {
+  .site-wrap { padding-inline: 23px; }
+  .policy-page { padding-top: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

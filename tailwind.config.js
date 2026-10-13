@@ -12,10 +12,15 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'],
-        'mono': ['"JetBrains Mono"', 'Fira Code', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+        'sans': ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        'mono': ['"SFMono-Regular"', 'Consolas', '"Liberation Mono"', 'monospace'],
       },
       colors: {
+        'paper': 'var(--color-paper)',
+        'ink': 'var(--color-ink)',
+        'muted': 'var(--color-muted)',
+        'line': 'var(--color-line)',
+        'surface': 'var(--color-surface)',
         // Base dark palette
         'dark': {
           950: '#050507',

@@ -1,18 +1,19 @@
 import type { Experience } from './types';
+import { profileData } from './profileData';
 
 export const experiencesData: Experience[] = [
   {
     id: 1,
-    company: 'Mercedes Benz',
+    company: 'Mercedes-Benz',
     period: '2022 - Present',
-    position: 'System Architect & Technical Product Owner',
+    position: profileData.title,
     description: 'Started as a Corporate Student in a dual study program combining theoretical education with practical work experience at Mercedes Benz, working across various departments on software development, data analysis, and automotive systems. Transitioned into architecture and technical leadership roles after graduation.',
     roles: [
       {
-        title: 'System Architect & Technical Product Owner',
+        title: profileData.title,
         period: 'Mar 2026 - Present',
-        description: 'Leading a team of 5 developers and 3 working students to build an orchestration platform on top of Camunda 8. Designed and developed a higher-level abstraction layer that provides reusable building blocks for BTVs to model their software approval workflows. Defined process standards aligned with VDA2 requirements. Initially conceptualised and prototyped the platform as System Architect before transitioning into the Product Owner role to scale delivery.',
-        technologies: ['Camunda 8', 'System Architecture', 'Technical Leadership', 'Product Management', 'VDA2', 'Process Orchestration']
+        description: 'Leading technical development and building software in Cortex to connect engineering information across tools. My work covers a shared understanding of data, the services that store and link it, and connecting AI to the context and tools it needs.',
+        technologies: ['Software Engineering', 'Data Modelling', 'AI Orchestration', 'Technical Leadership']
       },
       {
         title: 'System Architect',
