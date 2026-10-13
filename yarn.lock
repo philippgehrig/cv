@@ -5937,7 +5937,7 @@ koa@^2.14.2:
     type-is "^1.6.16"
     vary "^1.1.2"
 
-launch-editor@^2.14.1:
+launch-editor@^2.11.1:
   version "2.14.1"
   resolved "https://registry.yarnpkg.com/launch-editor/-/launch-editor-2.14.1.tgz#f7e0da3f58aaea03fea01074d840b5f739ed7ddc"
   integrity sha512-QWBrQsMpH7gPr965dsKD/3cKWiNoTjpATQf++Xq63N6sKRGMwlVXz41O1IZTMfZQgBctD/K5Zt06+/I6pP6+HA==
