@@ -5,15 +5,16 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
   ],
+  css: ['~/assets/css/main.css'],
+  // Static images are not content-hashed, so cache for a week (not "immutable").
+  routeRules: {
+    '/images/**': { headers: { 'cache-control': 'public, max-age=604800, stale-while-revalidate=86400' } },
+  },
   app: {
     head: {
-      link: [
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap'
-        }
+      htmlAttrs: { lang: 'en' },
+      meta: [
+        { name: 'theme-color', content: '#f0ede7' }
       ]
     }
   },

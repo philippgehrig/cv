@@ -1,25 +1,27 @@
 import type { TimelineEntry, YearMarker, TimelineItem } from './types';
+import { profileData } from './profileData';
+import { mastersEducation } from './educationData';
 
 const entries: TimelineEntry[] = [
   {
     id: 'mb-tpo',
     type: 'work',
-    title: 'System Architect & Technical Product Owner',
+    title: profileData.title,
     subtitle: 'Mercedes-Benz Group AG',
     period: 'Mar 2026 – Present',
     startDate: '2026-03',
-    description: 'Leading a team of 5 developers and 3 working students to build an orchestration platform on top of Camunda 8. Designed a higher-level abstraction layer providing reusable building blocks for BTVs to model software approval workflows. Defined process standards aligned with VDA2 requirements.',
-    technologies: ['Camunda 8', 'System Architecture', 'Technical Leadership', 'Product Management', 'VDA2', 'Process Orchestration'],
+    description: profileData.bio,
+    technologies: ['Software Engineering', 'Data Modelling', 'AI Orchestration', 'Technical Leadership'],
   },
   {
     id: 'master-cs',
     type: 'education',
-    title: 'Master of Science in Computer Science',
-    subtitle: 'DHBW CAS – Center for Advanced Studies',
-    period: 'Oct 2026 (upcoming)',
-    startDate: '2026-10',
-    description: 'Work-integrated Master programme combining advanced computer science with leadership development, strengthening both technical depth and the ability to drive engineering teams.',
-    technologies: ['Computer Science', 'Technical Leadership', 'Work-Integrated'],
+    title: mastersEducation.degree,
+    subtitle: mastersEducation.institution,
+    period: mastersEducation.period,
+    startDate: mastersEducation.startDate,
+    description: mastersEducation.description,
+    technologies: ['Data Science', 'Artificial Intelligence', 'Work-Integrated'],
   },
   {
     id: 'mb-architect',
