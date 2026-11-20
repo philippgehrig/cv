@@ -13,13 +13,16 @@
           <p>{{ profile.bio }}</p>
         </div>
         <figure v-if="profile.profile_image" class="intro-portrait">
-          <img
-            :src="profile.profile_image"
-            :alt="profile.name"
-            width="640"
-            height="640"
-            fetchpriority="high"
-          >
+          <picture>
+            <source :srcset="portraitWebp" type="image/webp">
+            <img
+              :src="profile.profile_image"
+              :alt="profile.name"
+              width="640"
+              height="640"
+              fetchpriority="high"
+            >
+          </picture>
         </figure>
       </section>
 
@@ -44,6 +47,8 @@
 import { profileData as profile } from '~/composables/data/profileData';
 import { mastersEducation as study } from '~/composables/data/educationData';
 import { portfolioData as portfolio } from '~/composables/data/portfolioData';
+
+const portraitWebp = (profile.profile_image ?? '').replace(/\.png$/, '.webp');
 </script>
 
 <style scoped>
@@ -114,6 +119,7 @@ import { portfolioData as portfolio } from '~/composables/data/portfolioData';
   margin: 0;
 }
 
+.intro-portrait picture,
 .intro-portrait img {
   display: block;
   width: 100%;
@@ -171,8 +177,22 @@ import { portfolioData as portfolio } from '~/composables/data/portfolioData';
 
 .statement p { font-size: 1.125rem; line-height: 1.55; letter-spacing: -0.02em; }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .dashboard { grid-template-columns: 1fr; }
+  .intro-portrait { max-width: 340px; }
+}
+
+@media (min-width: 651px) and (max-width: 1100px) {
+  .learning {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    align-items: end;
+  }
+  .learning .eyebrow { grid-column: 1 / -1; }
+  .learning h2 { grid-column: 1; grid-row: 2 / span 2; max-width: none; margin: 1.25rem 0 0; }
+  .learning p:not(.study-status) { grid-column: 2; grid-row: 2; margin-top: 1.25rem; }
+  .learning .study-status { grid-column: 2; grid-row: 3; margin-top: 0; padding-top: 1rem; }
 }
 
 @media (max-width: 650px) {

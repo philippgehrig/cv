@@ -22,15 +22,12 @@ A modern, responsive personal CV/portfolio website built with **Nuxt 3**, **Vue 
 │   └── layout/           # Layout components (Navbar, Footer)
 ├── composables/          # Vue composables for data access
 │   ├── useProfile.ts     # Profile data composable
-│   ├── useEducation.ts   # Education data composable
-│   ├── useExperiences.ts # Work-experience data composable
 │   └── data/             # Static data files and TypeScript types
 ├── pages/                # Application pages
 │   ├── index.vue         # Main CV page
 │   └── policies/         # Legal pages (privacy, legal notice, terms, sitemap)
 ├── assets/css/main.css   # Shared studio palette, layout, and accessibility styles
-├── plugins/              # Nuxt plugins
-├── public/               # Static assets (images, logos)
+├── public/               # Static assets (portrait as WebP + PNG fallback)
 └── tests/                # Vitest unit tests
 ```
 

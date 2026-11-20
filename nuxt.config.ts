@@ -6,6 +6,10 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
   ],
   css: ['~/assets/css/main.css'],
+  // Static images are not content-hashed, so cache for a week (not "immutable").
+  routeRules: {
+    '/images/**': { headers: { 'cache-control': 'public, max-age=604800, stale-while-revalidate=86400' } },
+  },
   app: {
     head: {
       htmlAttrs: { lang: 'en' },
