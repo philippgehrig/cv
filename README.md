@@ -35,7 +35,7 @@ A modern, responsive personal CV/portfolio website built with **Nuxt 3**, **Vue 
 
 ### Prerequisites
 
-- Node.js v22+
+- Node.js v24 (LTS)
 - Yarn
 
 ### Installation
